@@ -1,12 +1,34 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import { GatewayProvider } from '@civic/solana-gateway-react';
-import { useWallet } from '@solana/wallet-adapter-react';
-import * as web3 from '@solana/web3.js';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { PublicKey } from '@solana/web3.js';
 import theme from 'config/chakra.config';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
+import { FC } from 'react';
 import HomeLayout from 'src/components/Layouts/HomeLayout';
 require('@solana/wallet-adapter-react-ui/styles.css');
+
+const GATEKEEPER_NETWORK = 'uniqobk8oGh4XBLMqM68K8M2zNu3CdYX7q5go7whQiv';
+const CLUSTER = WalletAdapterNetwork.Devnet;
+const Gateway: FC<{
+  children?: React.ReactNode;
+}> = ({ children }) => {
+  const { connection } = useConnection();
+  const wallet = useWallet();
+  return (
+    <GatewayProvider
+      connection={connection}
+      wallet={wallet}
+      cluster={CLUSTER}
+      gatekeeperNetwork={new PublicKey(GATEKEEPER_NETWORK)}
+      options={{ autoShowModal: false }}
+    >
+      {children}
+    </GatewayProvider>
+  );
+};
 
 const WalletConnectionProvider: any = dynamic(
   () => import('../context/WalletConnectionProvider'),
@@ -18,27 +40,15 @@ export default function App({
   Component,
   pageProps: { ...pageProps },
 }: AppProps) {
-  const connection = new web3.Connection(web3.clusterApiUrl('mainnet-beta'));
-  const wallet = useWallet();
-
-  const gatekeeperNetworkKey = new web3.PublicKey(
-    process.env.NEXT_PUBLIC_GATEKEEPER_NETWORK_KEY as string
-  );
-
   return (
     <WalletConnectionProvider>
-      <GatewayProvider
-        connection={connection}
-        wallet={wallet}
-        cluster="mainnet-beta"
-        gatekeeperNetwork={gatekeeperNetworkKey}
-      >
-        <ChakraProvider theme={theme}>
+      <ChakraProvider theme={theme}>
+        <Gateway>
           <HomeLayout>
             <Component {...pageProps} />
           </HomeLayout>
-        </ChakraProvider>
-      </GatewayProvider>
+        </Gateway>
+      </ChakraProvider>
     </WalletConnectionProvider>
   );
 }

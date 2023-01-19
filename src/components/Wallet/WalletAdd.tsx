@@ -6,33 +6,32 @@ import { TbCopy } from 'react-icons/tb';
 import { useUserStore } from 'src/store/userStore';
 import { SuccessToast } from '../Toasts/Toasts';
 
-const WalletAdd = ({
-  size,
-  color,
-  copy,
-}: {
+type PropsType = {
   size?: string;
   color?: string;
   copy?: boolean;
-}) => {
+};
+
+const WalletAdd = ({ size, color, copy }: PropsType) => {
   const { onCopy, value, setValue, hasCopied } = useClipboard('');
   const { user } = useUserStore();
   const toast = useToast();
-  const addr = user?.wallet?.publicKey;
+  const addr = user?.wallet?.publicKey
+    ? user?.wallet?.publicKey
+    : 'DJDqurqEufUxUhdtXgcRydDQ8VamZHpvMPioDt5nAdEW';
 
   useEffect(() => {
     if (addr) {
       setValue(addr as SetStateAction<string>);
-      // console.log('value - ', value);
     }
-  }, [addr, hasCopied, value]);
+  }, [addr, hasCopied, setValue, value]);
 
   if (!addr) return <></>;
 
   let first = addr.slice(0, 4);
   let last = addr.slice(addr.length - 4, addr.length);
   let truncatedAddr = first + '...' + last;
-
+  console.log('truncated addy - ', truncatedAddr);
   const fillColor = color ? color : '#A6A6A6';
 
   const propsSize = size ? size : 'md';
@@ -61,7 +60,10 @@ const WalletAdd = ({
   return (
     <HStack w="100%" justify={'space-between'}>
       <HStack>
-        <Center height={logoSize} w={logoSize}>
+        <Center
+          height={{ base: '3', md: logoSize }}
+          width={{ base: '3', md: logoSize }}
+        >
           <svg
             width="30"
             height="22"
@@ -83,7 +85,11 @@ const WalletAdd = ({
             />
           </svg>
         </Center>
-        <Text fontSize={size} color={fillColor} fontWeight="600">
+        <Text
+          fontSize={{ base: 'xs', md: size }}
+          color={fillColor}
+          fontWeight="600"
+        >
           {truncatedAddr}
         </Text>
       </HStack>
@@ -108,6 +114,18 @@ const WalletAdd = ({
       )}
     </HStack>
   );
+};
+
+export const TruncatedAddr = () => {
+  const { user } = useUserStore();
+  const addr = user?.wallet?.publicKey
+    ? user?.wallet?.publicKey
+    : 'DJDqurqEufUxUhdtXgcRydDQ8VamZHpvMPioDt5nAdEW';
+
+  let first = addr.slice(0, 4);
+  let last = addr.slice(addr.length - 4, addr.length);
+  let truncatedAddr = first + '...' + last;
+  return truncatedAddr;
 };
 
 export default WalletAdd;

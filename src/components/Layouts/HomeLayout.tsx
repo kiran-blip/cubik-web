@@ -1,15 +1,13 @@
 import { ChildInterface } from '@/interfaces/children';
-import { Center, Container, useToast } from '@chakra-ui/react';
+import { Container, useToast } from '@chakra-ui/react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import MainBackground from 'src/components/Background/MainBackground';
-import { Header, AuthHeader } from 'src/components/Navigation/Header';
+import { AuthHeader, Header } from 'src/components/Navigation/Header';
 import { useUserStore } from 'src/store/userStore';
-import { FailureToast, SuccessToast } from '../Toasts/Toasts';
-import { useRouter } from 'next/router';
-import axios from 'axios';
-import { getUserByPubKey } from 'src/lib/api/authHelper';
+import { SuccessToast } from '../Toasts/Toasts';
 
 const HomeLayout = ({ children }: ChildInterface) => {
   const { setUser, user } = useUserStore();
@@ -18,42 +16,42 @@ const HomeLayout = ({ children }: ChildInterface) => {
   const router = useRouter();
 
   // this effect is a higer level of use effect which will be called everytime for connecting wallet
-  useEffect(() => {
-    if (publicKey) {
-      setUser({
-        _id: undefined,
-        wallet: {
-          publicKey: publicKey.toBase58(),
-          connected: true,
-        },
-        username: undefined,
-      });
-      SuccessToast({
-        toast,
-        message: 'Wallet Connected Succesfully',
-      });
-      // make a request to the server and fetch user details if he exists or not
-      console.log(
-        '1 - Signedup/LogedIn and pubkey is there | Lets send request'
-      );
-      getUserByPubKey(publicKey)
-        .then((res) => {
-          console.log('2 - Got this response from the server - ', res);
-          // if res.data is empty create new user by redirecting into new page
-          // redirect to profile/create
-          router.push('/profile/create');
-          // if it is not empty then update the state and redirect to profile page
-        })
-        .catch((e) => console.log('error here in use effect', e));
-    } else {
-      console.log('wallet not connected');
-      setUser({
-        _id: undefined,
-        wallet: undefined,
-        username: undefined,
-      });
-    }
-  }, [connected]);
+  // useEffect(() => {
+  //   if (publicKey) {
+  //     setUser({
+  //       _id: undefined,
+  //       wallet: {
+  //         publicKey: publicKey.toBase58(),
+  //         connected: true,
+  //       },
+  //       username: undefined,
+  //     });
+  //     SuccessToast({
+  //       toast,
+  //       message: 'Wallet Connected Succesfully',
+  //     });
+  //     // make a request to the server and fetch user details if he exists or not
+  //     console.log(
+  //       '1 - Signedup/LogedIn and pubkey is there | Lets send request'
+  //     );
+  //     getUserByPubKey(publicKey)
+  //       .then((res) => {
+  //         console.log('2 - Got this response from the server - ', res);
+  //         // if res.data is empty create new user by redirecting into new page
+  //         // redirect to profile/create
+  //         router.push('/profile/create');
+  //         // if it is not empty then update the state and redirect to profile page
+  //       })
+  //       .catch((e) => console.log('error here in use effect', e));
+  //   } else {
+  //     console.log('wallet not connected');
+  //     setUser({
+  //       _id: undefined,
+  //       wallet: undefined,
+  //       username: undefined,
+  //     });
+  //   }
+  // }, [connected]);
 
   useEffect(() => {
     if (disconnecting) {

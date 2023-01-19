@@ -1,0 +1,261 @@
+[
+    {
+        "name": "Anchor",
+        "logo": "https://camo.githubusercontent.com/73b2a433c137f781fb799073ceba7ffded98a2cb5db2ce6aa7f7ab9eaeb547a9/68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f46565556614f3958454141756c764b3f666f726d61743d706e67266e616d653d736d616c6c",
+        "about": "Anchor is a framework for Solana's Sealevel runtime.",
+        "tags": [
+            "framework"
+        ],
+        "url": "https://www.anchor-lang.com/",
+        "total_funding_raised": 85116,
+        "detailed_description": "Anchor is a framework for Solana's Sealevel runtime providing several convenient developer tools for writing smart contracts. Rust eDSL for writing Solana programs IDL specificationTypeScript package for generating clients from IDL, CLI and workspace management for developing complete applications. If you're familiar with developing in Ethereum's Solidity, Truffle, web3.js, then the experience will be familiar. Although the DSL syntax and semantics are targeted at Solana, the high level flow of writing RPC request handlers, emitting an IDL, and generating clients from IDL is the same.",
+        "socials": {
+            "twitter": "https://mobile.twitter.com/anchorlang",
+            "discord": "https://t.co/Laaoy4esC2"
+        }
+    },
+    {
+        "name": "Orca",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1DKwvuL_xw36fymf0CzyFXCQWt9m5Mg4qbiO6fWguLA&s",
+        "about": "Orca is the easiest way to exchange cryptocurrency on the Solana blockchain. You can exchange tokens with minimal transaction fees and lower latency than any DEX on Ethereum",
+        "total_funding_raised": 38748,
+        "url": "https://www.orca.so/",
+        "detailed_description": "Orca is the easiest way to exchange cryptocurrency on the Solana blockchain. Here, you can exchange tokens with minimal transaction fees and lower latency than any DEX on Ethereum, all while knowing that you’re getting a fair price. Additionally, you may provide liquidity to a trading pool to earn a share of trading fees.",
+        "socials": {
+            "twitter": "https://twitter.com/openbookdex",
+            "discord": "https://discord.com/invite/pX3n5Sercb"
+        },
+        "tags": [
+            "DeFi",
+            "SDK"
+        ]
+    },
+    {
+        "name": "Mango",
+        "logo": "https://1610690202-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/spaces%2F-MVID3wF97zSdsTruiIC%2Favatar-1615230387556.png?generation=1615230387858660&alt=media",
+        "total_funding_raised": 78471,
+        "url": "https://mango.markets/",
+        "about": "Mango is a decentralized autonomous organization. Makers or takers can earn interest on deposits and margin positions, as well as trade with near zero fees thanks to Solana’s high-performance blockchain.",
+        "socials": {
+            "twitter": "https://twitter.com/openbookdex",
+            "discord": "https://discord.com/invite/pX3n5Sercb"
+        },
+        "tags": [
+            "DAO",
+            "DeFi"
+        ]
+    },
+    {
+        "name": "Wordcel",
+        "logo": "https://pbs.twimg.com/profile_images/1497183193061277697/eaH0ns0y_400x400.png",
+        "total_funding_raised": 42687,
+        "url": "https://www.wordcelclub.com/",
+        "about": "Publish beautiful looking articles and get paid for them",
+        "detailed_description": "Wordcel is a Decentralized Publishing Stack on the Solana blockchain to enable writers to publish and monetize their work on-chain and manage their distribution while truly owning every single piece of the puzzle.",
+        "socials": {
+            "twitter": "https://twitter.com/wordcel_club",
+            "discord": "https://discord.gg/tCswbSK5W2"
+        },
+        "tags": [
+            "SDK",
+            "dapp"
+        ]
+    },
+    {
+        "name": "Pyth",
+        "logo": "https://avatars.githubusercontent.com/u/75637738?s=280&v=4",
+        "total_funding_raised": 32009,
+        "url": "https://pyth.network/",
+        "about": "Smarter data for smarter contracts.",
+        "detailed_description": "The Pyth network is a first-party financial oracle network designed to publish continuous real-world financial data on-chain in a tamper-resistant, decentralized, and self-sustainable environment.        ",
+        "socials": {
+            "twitter": "https://twitter.com/PythNetwork",
+            "discord": "https://t.me/Pyth_Network",
+            "telegram": "http://discord.gg/invite/PythNetwork"
+        },
+        "tags": [
+            "DeFi"
+        ]
+    },
+    {
+        "name": "OpenBook",
+        "logo": "https://pbs.twimg.com/media/FjaOqx_VIAAOeyX.png",
+        "total_funding_raised": 58856,
+        "url": "https://www.openbook-solana.com/",
+        "about": "OpenBook is a community-led fork of the Serum V3 program. The CLOB formerly known as Serum V3.",
+        "detailed_description": "Open Book is a new community-led fork of Serum V3, a central limit order book built by some of the biggest gigabrains in Solana DeFi, that maintains the dream of Serum but removes the security risks posed by FTX.Open Book matches buyers and sellers, allowing for fully-decentralized and permissionless on-chain price discovery at ludicrous speed. You can check out the book in action at http://openserum.io. Open Book facilitates seamless composability, allowing protocols to share liquidity, and in doing so, serves as a backstop for liquidations to all of the major lending protocols across ",
+        "socials": {
+            "twitter": "https://twitter.com/openbookdex",
+            "discord": "https://discord.com/invite/pX3n5Sercb"
+        },
+        "tags": [
+            "DeFi"
+        ]
+    },
+    {
+        "name": "Flipside Crypto",
+        "logo": "https://pbs.twimg.com/profile_images/1175454343220408320/jLE7ynFD_400x400.jpg",
+        "total_funding_raised": 59748,
+        "url": "https://flipsidecrypto.xyz/",
+        "about": "Flipside provides Community Enabled Crypto Analytics, allowing our users to create and share data insights on the crypto projects they care most about. Flipside Crypto puts pre-modeled and labeled blockchain data in the hands of communities. Community members earn bounties for answering questions with data.",
+        "detailed_description": "Free data for everyone",
+        "socials": {
+            "twitter": "https://twitter.com/flipsidecrypto",
+            "discord": "https://discord.com/invite/ZmU3jQuu6W"
+        },
+        "tags": [
+            "SDK",
+            "analytics"
+        ]
+    },
+    {
+        "name": "Helius",
+        "logo": "https://pbs.twimg.com/profile_images/1542698757078261762/M5kiXdij_400x400.jpg",
+        "total_funding_raised": 89115,
+        "url": "https://helius.xyz/",
+        "about": "The ultimate developer platform — specialized for Solana builders. Blaze past Localhost.",
+        "detailed_description": "Helius is the ultimate developer platform for building on Solana. Effortlessly navigate on-chain data with our powerful APIs, webhooks, and RPCs.",
+        "socials": {
+            "twitter": "https://twitter.com/heliuslabs",
+            "discord": "https://discord.com/invite/6GXdee3gBj"
+        },
+        "tags": [
+            "SDK",
+            "tool"
+        ]
+    },
+    {
+        "name": "Drift Protocol",
+        "logo": "https://pbs.twimg.com/profile_images/1608507060206948353/V1ChXSnf_400x400.jpg",
+        "total_funding_raised": 88992,
+        "url": "https://www.drift.trade/",
+        "about": "Drift brings on-chain, cross-margined perpetual futures to Solana, making future DEXs the best way to trade.",
+        "detailed_description": "Drift Protocol is an open-sourced decentralised exchange built on the Solana blockchain, enabling transparent and non-custodial trading on cryptocurrencies. Depositing collateral into Drift Protocol allows one to: trade perpetual swaps with up to 10x leverage, borrow or lend at variable rate yields, stake / provide liquidity, swap spot tokens",
+        "socials": {
+            "twitter": "https://twitter.com/DriftProtocol",
+            "discord": "https://discord.com/invite/fMcZBH8ErM"
+        },
+        "tags": [
+            "dex",
+            "DeFi"
+        ]
+    },
+    {
+        "name": "Solend",
+        "logo": "https://miro.medium.com/max/1200/1*6diP-K7zgEMigbOxJBLqQQ.png",
+        "total_funding_raised": 85196,
+        "url": "https://solend.fi/",
+        "detailed_description": "Solend is the leading algorithmic, decentralized protocol for lending and borrowing on Solana. Anyone with an internet connection can earn interest by lending their assets, and can use their deposits as collateral for borrowing. Solend is a hundred times faster and cheaper than Aave or Compound, making DeFi accessible to everyone as it was intended.",
+        "about": "Solend is the bank of the future, for everyone.",
+        "socials": {
+            "twitter": "https://twitter.com/solendprotocol",
+            "discord": "https://discord.gg/solend"
+        },
+        "tags": [
+            "dapp",
+            "DeFi"
+        ]
+    },
+    {
+        "name": "Exchange.art",
+        "logo": "https://media.licdn.com/dms/image/C4E0BAQFY7Y2Oz2OR-A/company-logo_200_200/0/1655727004339?e=2147483647&v=beta&t=xALNR3i4EKHKuPkmvGWXCopv9vatkbe-IfY4eozqcI8",
+        "total_funding_raised": 13808,
+        "url": "https://exchange.art/",
+        "about": "Leading fine art marketplace on Solana powering the creator economy in the digital world",
+        "detailed_description": "We are a Solana NFT Marketplace focused on 1/1 art and independent creators. Exchange is the most innovative NFT marketplace on Solana. With the Exchange Notification NFT, every transaction you make increases your status and earns you perks. Bid on almost any NFT you find on Exchange, listed or unlisted. Make a reasonable offer and the owner will receive an alert right in their wallet.",
+        "socials": {
+            "twitter": "https://twitter.com/exchgART",
+            "discord": "https://discord.gg/2ambwf3z4A"
+        },
+        "tags": [
+            "dapp",
+            "nft"
+        ]
+    },
+    {
+        "name": "Phantasia Sports",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToz2ldKKxNoNiBRSMjuf87hGs5D4ZtQiqNhGAUrUnWPA&s",
+        "total_funding_raised": 7582,
+        "url": "https://phantasia.app/",
+        "about": "The Future of Fantasy Sports",
+        "detailed_description": "The #1 blockchain-powered, peer-to-peer fantasy sports platform. Phantasia offers daily and season long fantasy sports contests all securely stored on the blockchain. Create or join in seconds, then get paid instantly when you win. All for zero fees. Know nothing about crypto or web3? No worries - skip the learning curve and focus on fantasy.",
+        "socials": {
+            "twitter": "https://twitter.com/PhantasiaSports",
+            "discord": "https://discord.com/invite/RHh5EDcxvs",
+            "telegram": "https://t.me/phantasiasports"
+        },
+        "tags": [
+            "dapp",
+            "game"
+        ]
+    },
+    {
+        "name": "Hello Moon",
+        "logo": "https://pbs.twimg.com/profile_images/1456194627204272132/DmD1RiIs_400x400.jpg",
+        "total_funding_raised": 52131,
+        "url": "https://www.hellomoon.io/",
+        "about": "Solana DeFi & NFT analytics.",
+        "detailed_description": "HelloMoon.io categorizes projects by suspected wash trading activity, ownership overlap across collections, average USDC value in holders' wallets, floor prices, volume, etc. -- and also labels the wallets that are engaging in each ecosystem.",
+        "socials": {
+            "twitter": "",
+            "discord": "",
+            "telegram": ""
+        },
+        "tags": [
+            "tool",
+            "analytics"
+        ]
+    },
+    {
+        "name": "Poloniex",
+        "logo": "https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/mfbpzxfche2k8o79hktb",
+        "total_funding_raised": 37636,
+        "url": "https://poloniex.com/",
+        "about": "The legendary crypto exchange since 2014",
+        "detailed_description": "The world's leading crypto asset exchange where traders can buy, sell and store over 100 assets including BTC, ETH, and the best altcoins on the market.Main services: spot and margin trading of digital assets, futures trading, and lending",
+        "socials": {
+            "twitter": "",
+            "discord": "",
+            "telegram": ""
+        },
+        "tags": [
+            "DeFi",
+            "Wallet"
+        ]
+    },
+    {
+        "name": "DeFi Land",
+        "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/10294.png",
+        "total_funding_raised": 49543,
+        "url": "https://defiland.app/",
+        "about": "DeFi, Gaming, NFTs and Metaverse reimagined in a new and all-in-one game",
+        "detailed_description": "DeFi Land is a multi-chain agriculture-simulation game created to gamify Decentralized Finance. Our game will have all the features that traditional platforms have but it will be gathered all in one place. Players will be able to start playing the game for free, grind their way up to the play-2-earn tier, compete with others, craft, trade and more.",
+        "socials": {
+            "twitter": "",
+            "discord": "",
+            "telegram": ""
+        },
+        "tags": [
+            "game",
+            "DeFi",
+            "nft"
+        ]
+    },
+    {
+        "name": "ALF Protocol",
+        "logo": "https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/36s9cAKFqea4gGFwAjG92Aoo3Zx5L3AbqBB519QeKsZU/logo.png",
+        "total_funding_raised": 26761,
+        "url": "https://alfprotocol.com/",
+        "about": "SOLANA based Leveraged Liquidity & Lending dApp",
+        "detailed_description": "The Alf Protocol facilitates a new kind of leveraged yield farming experience for borrowers, with enhanced leverage and farming rewards, while enabling lenders to earn a significantly higher yield on supplied tokens without the risk of impermanent loss.",
+        "socials": {
+            "twitter": "",
+            "discord": "",
+            "telegram": ""
+        },
+        "tags": [
+            "DeFi",
+            "dex"
+        ]
+    }
+]

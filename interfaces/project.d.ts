@@ -2,12 +2,14 @@ import { contributions } from './contributions';
 import { userType } from './user';
 
 export type projectType = {
-  logo: String;
-  name: String;
-  short_description: String;
-  detailed_description: String;
-  owner: userType;
-  contributors: contributions[];
-  funding_received: Number;
-  socials: [{ name: String; url: String }];
+  name: string;
+  logo: string;
+  about: string;
+  tags: string[];
+  url: string;
+  total_funding_raised: number;
+  detailed_description: string;
+  owner?: userType;
+  contributors?: contributions[];
+  socials?: [{ name: string; url: string }];
 };

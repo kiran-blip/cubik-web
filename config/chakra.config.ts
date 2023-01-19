@@ -1,8 +1,10 @@
 import { extendTheme, ThemeConfig } from '@chakra-ui/react';
+import { Avatar } from 'theme/components/avatar';
 import { Button } from 'theme/components/buttons';
-import { styles } from 'theme/styles';
 import { Input } from 'theme/components/input';
-
+import { Tabs } from 'theme/components/tabs';
+import { Tag } from 'theme/components/tag';
+import { styles } from 'theme/styles';
 const config: ThemeConfig = {
   initialColorMode: 'light',
   useSystemColorMode: false,
@@ -24,6 +26,9 @@ const theme = extendTheme({
   components: {
     Button,
     Input,
+    Avatar,
+    Tag,
+    Tabs,
   },
 });
 

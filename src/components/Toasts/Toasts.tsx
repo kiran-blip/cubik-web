@@ -1,4 +1,4 @@
-import { Center, HStack, Text, useToast } from '@chakra-ui/react';
+import { Center, HStack, Text } from '@chakra-ui/react';
 import { Player } from '@lottiefiles/react-lottie-player';
 import React from 'react';
 
@@ -27,7 +27,7 @@ const Toast = ({
     >
       <Player
         autoplay
-        //loop
+        keepLastFrame
         speed={speed}
         src={url}
         style={{ height: `${size}px`, width: `${size}px` }}
@@ -58,7 +58,7 @@ const SuccessToast = ({ toast, message }: any) => {
         >
           <Player
             autoplay
-            //loop
+            keepLastFrame
             speed={0.7}
             src={'https://assets7.lottiefiles.com/packages/lf20_cyqip6dr.json'}
             style={{ height: `22px`, width: `22px` }}
@@ -88,7 +88,7 @@ const FailureToast = ({ toast }: any) => {
       >
         <Player
           autoplay
-          loop
+          keepLastFrame
           speed={1}
           src={'https://assets8.lottiefiles.com/packages/lf20_bmtax5uq.json'}
           style={{ height: '32px', width: '32px' }}

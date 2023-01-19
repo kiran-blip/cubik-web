@@ -1,11 +1,4 @@
-import {
-  Center,
-  Collapse,
-  HStack,
-  Text,
-  useDisclosure,
-  VStack,
-} from '@chakra-ui/react';
+import { Center, HStack, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import React, { useState } from 'react';
 import { ConnectWallet } from './ConnectWallet';
@@ -42,12 +35,13 @@ const SolanaWalletButton = () => {
       }}
       onMouseMove={handleMouseMove}
       w="full"
-      align={'center'}
-      justify="center"
-      rounded="6px"
-      position={'relative'}
-      background="#222222"
+      align={'start'}
+      p={{ base: '1rem 1.3rem', md: '2rem 3rem' }}
+      justify="start"
+      rounded="12px"
+      background="#0E0E0E"
       overflow={'hidden'}
+
       // _after={{
       //   content: `" "`,
       //   zIndex: '1',
@@ -62,19 +56,7 @@ const SolanaWalletButton = () => {
       //   backgroundColor: 'rgba(225, 225, 225, 1);',
       // }}
     >
-      <HStack
-        onClick={() => {
-          if (!connected) onToggle();
-        }}
-        as="button"
-        rounded="6px"
-        w="full"
-        py="0.4rem"
-        m="0.1rem"
-        px="1rem"
-        align={'center'}
-        justify="center"
-      >
+      <HStack pb="0.5rem" align={'center'} justify="start">
         <Center zIndex={'0'}>
           <svg
             width="19"
@@ -99,33 +81,17 @@ const SolanaWalletButton = () => {
           zIndex={'0'}
           color="#A6A6A6"
           fontWeight={'500'}
-          fontSize="lg"
-          maxW="10rem"
+          fontSize={{ base: 'md', md: 'lg' }}
           sx={{
             noOfLines: '1',
           }}
         >
-          {publicKey ? publicKey.toBase58() : 'Solana'}
+          {publicKey ? publicKey.toBase58() : 'Connect Solana Wallet'}
         </Text>
       </HStack>
-      <Collapse in={isOpen} animateOpacity>
-        <Text
-          px={{ base: '1rem', md: '1.5rem' }}
-          color="#C5C5C5"
-          fontSize={{ base: 'xs', md: 'xs' }}
-        >
-          Connect your Solana Wallet to Create Account.
-        </Text>
-        <Center
-          flexDir={'column'}
-          gap="0.5rem"
-          py="1.5rem"
-          px={{ base: '1rem', md: '0.5rem' }}
-          w="full"
-        >
-          <ConnectWallet />
-        </Center>
-      </Collapse>
+      <VStack w="full" gap="0.2rem">
+        <ConnectWallet />
+      </VStack>
     </VStack>
   );
 };

@@ -1,21 +1,20 @@
-import React, { FC, useMemo } from 'react';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import {
   ConnectionProvider,
   WalletProvider,
 } from '@solana/wallet-adapter-react';
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import {
   BackpackWalletAdapter,
   CoinbaseWalletAdapter,
   GlowWalletAdapter,
+  LedgerWalletAdapter,
   PhantomWalletAdapter,
-  SlopeWalletAdapter,
   SolflareWalletAdapter,
-  SolletExtensionWalletAdapter,
   SolletWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
-import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import React, { FC, useMemo } from 'react';
 
 type Props = {
   children?: React.ReactNode;
@@ -27,19 +26,18 @@ const WalletConnectionProvider: FC<Props> = ({ children }: any) => {
     () => [
       new PhantomWalletAdapter(),
       new BackpackWalletAdapter(),
-      // new CoinbaseWalletAdapter(),
+      new CoinbaseWalletAdapter(),
       new GlowWalletAdapter(),
-      new SlopeWalletAdapter(),
-      new SolflareWalletAdapter(),
-      // new SolletExtensionWalletAdapter(),
-      // new SolletWalletAdapter(),
+      new SolflareWalletAdapter({ network }),
+      new LedgerWalletAdapter(),
+      new SolletWalletAdapter({ network }),
     ],
     []
   );
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={wallets} autoConnect>
+      <WalletProvider wallets={wallets} autoConnect={false}>
         <WalletModalProvider>{children}</WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>

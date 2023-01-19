@@ -1,65 +1,36 @@
-/* eslint-disable @next/next/no-img-element */
-import {
-  Box,
-  Text,
-  Grid,
-  Flex,
-  Center,
-  Spinner,
-  useToast,
-  HStack,
-} from '@chakra-ui/react';
+import { Center, Flex, Text } from '@chakra-ui/react';
 import {
   useWallet,
   Wallet as SolanaWallet,
 } from '@solana/wallet-adapter-react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useUserStore } from 'src/store/userStore';
 
 export const ConnectWallet = () => {
-  const { wallets, select, connected, publicKey } = useWallet();
-  const { user } = useUserStore();
-  const router = useRouter();
+  const { wallets, select, connecting } = useWallet();
 
-  const onConnectWallet = (wallet: SolanaWallet) => {
-    console.log('wallet button clicked');
-    // we will not update the user store ( for wallet ) from here it will be done in the layout
-    wallet.adapter
-      .connect()
-      .then(() => {
-        console.log('clicked Wallet - ', wallet.adapter.name);
-        select(wallet.adapter.name);
-        // make a request to the backend fetch the user if the user is not there create a account and redirect to create account page
-      })
-      .catch((e) =>
-        console.log(
-          'there was an error while connecting to wallet - ',
-          (e as Error).message
-        )
-      );
-  };
-
-  useEffect(() => {
-    if (user?.wallet?.connected) {
-      router.push('/');
+  const onConnectWallet = async (wallet: SolanaWallet) => {
+    try {
+      await wallet.adapter.connect();
+      select(wallet.adapter.name);
+    } catch (e) {
+      console.log('error');
+      // throw error
     }
-  }, [router, user?.wallet?.connected]);
+  };
 
   return (
     <>
-      {wallets.map((wallet: SolanaWallet, index) => {
+      {wallets.map((wallet, index) => {
         return (
           <Flex
             zIndex={'1'}
             key={index}
-            background={'#323131 !important'}
+            background={'#222222 !important'}
             align="center"
-            w="12rem"
+            w="full"
             h="40px"
             px="1rem"
-            rounded="6px"
+            rounded="7px"
             cursor="pointer"
             transition="all 0.15s"
             color="#A6A6A6"
@@ -80,6 +51,7 @@ export const ConnectWallet = () => {
           >
             <Flex gap={{ base: '0.1rem', md: '0.5rem' }} align="center">
               <Center rounded="full">
+                {/* add spinner when wallet is connecting */}
                 <Image
                   width={20}
                   height={20}

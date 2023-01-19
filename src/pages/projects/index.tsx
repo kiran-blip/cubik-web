@@ -1,43 +1,20 @@
-import config from '@/config/general.config';
 import {
-  Button,
   Container,
-  HStack,
   Heading,
   Input,
   InputGroup,
   InputLeftElement,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
   VStack,
 } from '@chakra-ui/react';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import React, { useState } from 'react';
+import { BiSearch } from 'react-icons/bi';
+import ProjectList from 'src/components/Projects/ProjectsPage/ProjectList';
 import SEO from 'src/components/SEO';
-import {
-  IdentityButton,
-  ButtonMode,
-  useGateway,
-  GatewayStatus,
-} from '@civic/solana-gateway-react';
-import { BiSearch, BiSearchAlt2 } from 'react-icons/bi';
-import { projectType } from '@/interfaces/project';
-import ProjectList from 'src/components/Projects/ProjectList';
-
-function RequestGatewayToken() {
-  const { gatewayStatus, requestGatewayToken, gatewayToken } = useGateway();
-  return (
-    <>
-      <div>Wallet adapter connected</div>
-      <div>Pass status: {GatewayStatus[gatewayStatus]}</div>
-      <br />
-      <button type="submit" onClick={requestGatewayToken}>
-        Request Pass
-      </button>
-      <br />
-      <div>Pass: {gatewayToken?.publicKey.toBase58()}</div>
-    </>
-  );
-}
 
 const Data = [{ name: '' }];
 
@@ -72,27 +49,38 @@ const Projects = () => {
         image={`https://solana.ghost.io/content/images/2022/06/solana-network-upgrades.png`}
       />
       <main>
-        <Container maxW="8xl" px="2rem" py="2rem">
-          <HStack>
-            <VStack maxW="20rem" gap="2rem">
-              <Heading color="#D1D1D1" fontWeight={'600'}>
-                Discover and Fund Solana Projects
+        <Container maxW="7xl" px={{ base: '1.8rem', lg: '8rem' }} py="2rem">
+          <VStack alignItems={'start'} justifyContent="start">
+            <VStack
+              py={{ base: '0rem', md: '3rem' }}
+              maxW="20rem"
+              gap={{ base: '1rem', md: '2rem' }}
+            >
+              <Heading
+                color="#D1D1D1"
+                fontWeight={'600'}
+                pr={{ base: '3rem', md: '0rem' }}
+                fontSize={{ base: '2xl', md: '3xl' }}
+              >
+                Discover and Fund Public Goods on Solana
               </Heading>
               <InputGroup
-                rounded="full"
+                rounded="4px"
+                h="fit-content"
                 background={'rgba(18, 18, 18, 0.4)'}
-                p="0.5rem 0rem"
+                // p="0.5rem 0rem"
                 sx={{
                   backdropFilter: 'blur(14px)',
                   margin: '0px !important',
                   marginTop: '0px !important',
                 }}
+                zIndex="1"
                 _after={{
                   content: `" "`,
                   position: 'absolute',
                   inset: '0',
-                  borderRadius: '4rem',
-                  padding: '3px',
+                  borderRadius: '4px',
+                  padding: '1px',
                   background:
                     'linear-gradient(20.84deg,rgba(51, 51, 51, 1), rgba(104, 104, 104, 0))',
                   WebkitMask:
@@ -101,17 +89,24 @@ const Projects = () => {
                   MaskComposite: 'exclude',
                 }}
               >
-                <InputLeftElement w="4.5rem" h="full" pointerEvents="none">
+                <InputLeftElement
+                  w="3.5rem"
+                  h="full"
+                  pointerEvents="none"
+                  bg="transparent"
+                >
                   <BiSearch size="1.4rem" color="#5B5B5B" />
                 </InputLeftElement>
                 <Input
-                  pl="3.5rem"
-                  border="none"
+                  variant={'unstyled'}
+                  pl="3rem"
+                  //  border="none"
                   bg="transparent"
-                  placeholder="Search User"
+                  placeholder="Search Projects"
                   _placeholder={{
                     color: '#5B5B5B',
-                    fontSize: '16px',
+                    opacity: '0.6',
+                    fontSize: '14px',
                     fontWeight: '500',
                   }}
                   _focus={{
@@ -119,15 +114,29 @@ const Projects = () => {
                     outline: 'none',
                     boxShadow: 'none',
                   }}
-                  rounded="full"
+                  //  rounded="full"
+                  h="2.5rem"
                   pb={'3px'}
                   value={wordEntered}
                   onChange={handleSearch}
                 />
               </InputGroup>
             </VStack>
-            <ProjectList />
-          </HStack>
+            <Tabs p="4rem 0rem" variant={'cubik'}>
+              <TabList gap={{ base: '0.5rem', md: '1rem' }}>
+                <Tab fontSize={{ base: 'sm', md: 'md' }}>Projects</Tab>
+                <Tab fontSize={{ base: 'sm', md: 'md' }}>Collections</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  <ProjectList />
+                </TabPanel>
+                <TabPanel>
+                  <ProjectList />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </VStack>
         </Container>
       </main>
     </>
