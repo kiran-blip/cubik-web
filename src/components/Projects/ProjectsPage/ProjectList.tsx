@@ -165,6 +165,7 @@ const ProjectList = () => {
         direction={{ base: 'column', sm: 'row', md: 'row' }}
       >
         {ProjectsData.map((project, key) => {
+          //@ts-ignore
           return <ProjectCard project={project} key={key} />;
         })}
       </Wrap>

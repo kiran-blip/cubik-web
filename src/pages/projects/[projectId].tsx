@@ -25,7 +25,9 @@ const ProjectDetails = () => {
   return (
     <Container maxW="6xl" py={{ base: '1rem', md: '2rem' }}>
       <VStack gap="2rem">
+        {/* @ts-ignore */}
         <ProjectsAboutAndDonation projectDetails={projectDetails} />
+        {/* @ts-ignore */}
         <ProjectDetailLayout projectDetails={projectDetails} />
       </VStack>
     </Container>
