@@ -10,14 +10,17 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import WalletAdd from 'src/components/Wallet/WalletAdd';
+import { createUser } from 'src/lib/api/userProfile';
 import { useUserStore } from 'src/store/userStore';
 
 const CreateProfile = () => {
   const { publicKey } = useWallet();
   const { user, setUser } = useUserStore();
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -33,12 +36,23 @@ const CreateProfile = () => {
 
   function onSubmit(values: any) {
     return new Promise<void>((resolve) => {
-      console.log('values', values);
-      setUser({
-        _id: 'random.123id',
-        wallet: { publicKey: publicKey?.toBase58() as string, connected: true },
+      //sign transaction here
+      createUser({
+        icon: publicKey?.toBase58() as string,
         username: values.username,
-        about: values.about,
+        publickey: publicKey?.toBase58() as string,
+        verified: false,
+        bio: values.about,
+      }).then((res) => {
+        console.log('create user response, ', res.data.data);
+        setUser({
+          _id: res.data.data.id,
+          about: res.data.data.bio,
+          username: res.data.data.username,
+        });
+        console.log('user updated');
+        // update user
+        router.push('/signup/success');
       });
       resolve();
     });

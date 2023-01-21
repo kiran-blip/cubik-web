@@ -10,7 +10,7 @@ const CreateAccountLayout = (props: PropsType) => {
     <Container p="0" maxW="7xl">
       <Stack
         py={{ base: '0.8rem', md: '2rem' }}
-        alignItems={'center'}
+        alignItems={'start'}
         justifyContent="center"
         gap="2rem"
         direction={{

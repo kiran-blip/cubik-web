@@ -1,4 +1,5 @@
 import { Avatar } from '@chakra-ui/avatar';
+import { Button } from '@chakra-ui/button';
 import { HStack, Text, VStack } from '@chakra-ui/layout';
 import {
   Menu,
@@ -7,14 +8,15 @@ import {
   MenuItem,
   MenuList,
 } from '@chakra-ui/menu';
-import React from 'react';
-import WalletAdd from '../Wallet/WalletAdd';
-import { BiChevronDown } from 'react-icons/bi';
-import { Button } from '@chakra-ui/button';
 import { useWallet } from '@solana/wallet-adapter-react';
+import React from 'react';
+import { BiChevronDown } from 'react-icons/bi';
+import useUser from '../User/Profile/useUser';
+import WalletAdd from '../Wallet/WalletAdd';
 
 const DeskNavMenu = () => {
   const { disconnect } = useWallet();
+  const { user } = useUser();
   return (
     <HStack gap="0.5rem">
       <Menu>
@@ -40,7 +42,7 @@ const DeskNavMenu = () => {
           <HStack p="0.5rem 1rem" gap="0.5rem">
             <Avatar size={'sm'} />
             <VStack alignItems={'start'} justify="center" w="full" spacing="0">
-              <Text fontSize="md">Irfan Asif</Text>
+              <Text fontSize="md">{user?.username}</Text>
               <WalletAdd size="xs" copy={true} />
             </VStack>
           </HStack>
@@ -60,6 +62,22 @@ const DeskNavMenu = () => {
             }}
           >
             Projects
+          </MenuItem>
+          <MenuItem
+            mx="0.5rem"
+            bg="transparent"
+            rounded="md"
+            sx={{
+              width: '-webkit-fill-available',
+            }}
+            _hover={{
+              backgroundColor: '#262626',
+            }}
+            _active={{
+              backgroundColor: '#262626',
+            }}
+          >
+            Funding Rounds
           </MenuItem>
           <MenuItem
             mx="0.5rem"

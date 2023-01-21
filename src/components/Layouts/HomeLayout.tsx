@@ -72,8 +72,8 @@ const HomeLayout = ({ children }: ChildInterface) => {
     <Container p="0" maxW={'full'}>
       <MainBackground />
       <Container p="0" position={'absolute'} maxW={'full'} zIndex="999">
-        {user?.wallet ? (
-          <AuthHeader publicKey={user.wallet.publicKey} />
+        {user?._id ? (
+          <AuthHeader />
         ) : (
           <Header>
             <WalletMultiButton />
