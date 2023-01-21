@@ -2,6 +2,7 @@ import { extendTheme, ThemeConfig } from '@chakra-ui/react';
 import { Avatar } from 'theme/components/avatar';
 import { Button } from 'theme/components/buttons';
 import { Input } from 'theme/components/input';
+import { Menu } from 'theme/components/menu';
 import { Tabs } from 'theme/components/tabs';
 import { Tag } from 'theme/components/tag';
 import { styles } from 'theme/styles';
@@ -29,6 +30,7 @@ const theme = extendTheme({
     Avatar,
     Tag,
     Tabs,
+    Menu,
   },
 });
 

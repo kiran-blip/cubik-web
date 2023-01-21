@@ -58,7 +58,11 @@ const WalletAdd = ({ size, color, copy }: PropsType) => {
       break;
   }
   return (
-    <HStack w="100%" justify={'space-between'}>
+    <HStack
+      w="100%"
+      transform={{ base: 'translateX(-5px) scale(0.9)', sm: 'none' }}
+      justify={'space-between'}
+    >
       <HStack>
         <Center
           height={{ base: '3', md: logoSize }}
@@ -124,8 +128,8 @@ export const TruncatedAddr = () => {
 
   let first = addr.slice(0, 4);
   let last = addr.slice(addr.length - 4, addr.length);
-  let truncatedAddr = first + '...' + last;
-  return truncatedAddr;
+  let truncatedAdd = first + '...' + last;
+  return truncatedAdd;
 };
 
 export default WalletAdd;

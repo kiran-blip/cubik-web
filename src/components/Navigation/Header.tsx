@@ -1,32 +1,22 @@
-import { ReactNode } from 'react';
 import {
   Box,
-  Flex,
-  Link,
   Button,
-  useDisclosure,
-  Container,
-  useMediaQuery,
+  Center,
   Collapse,
+  Container,
+  Flex,
   HStack,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Avatar,
-  VStack,
   Text,
+  useDisclosure,
+  useMediaQuery,
 } from '@chakra-ui/react';
-import { Router, useRouter } from 'next/router';
-import { Cross as Hamburger } from 'hamburger-react';
-import Logo from '../assets/logo/Logo';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { BiChevronDown } from 'react-icons/bi';
-import WalletAdd from '../Wallet/WalletAdd';
+import { Cross as Hamburger } from 'hamburger-react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { ReactNode } from 'react';
+import { MdKeyboardArrowRight } from 'react-icons/md';
+import Logo from '../assets/logo/Logo';
 import DeskNavMenu from './DeskNavMenu';
 
 export function Header({ children }: { children: ReactNode }) {
@@ -70,15 +60,27 @@ export function Header({ children }: { children: ReactNode }) {
           />
         ) : (
           <>
-            {/* <HStack gap='1rem' pl='3rem'>
-              <Text>Projects</Text>
-              <Center>
-                <Box width='4px' height='4px' bg='white' rounded='full' />
-              </Center>
-              <Text>About</Text>
-            </HStack> */}
+            {!(router.pathname === '/signup') && (
+              <HStack pl="5rem" gap="1rem">
+                <Link href="/projects" passHref>
+                  <Text fontSize="sm" fontWeight={'600'} cursor={'pointer'}>
+                    Projects
+                  </Text>
+                </Link>
+                <Center>
+                  {/*  <Box width='4px' height='4px' bg='white' rounded='full' />*/}
+                </Center>
+                <Link href="/rounds" passHref>
+                  <Text fontSize="sm" fontWeight={'600'} cursor={'pointer'}>
+                    Funding Rounds
+                  </Text>
+                </Link>
+              </HStack>
+            )}
             <HStack gap="0.5rem">
-              {!(router.pathname === '/login') && (
+              {!(
+                router.pathname === '/login' || router.pathname === '/signup'
+              ) && (
                 <Button
                   onClick={() => router.push('/login')}
                   variant={'outline'}
@@ -86,8 +88,30 @@ export function Header({ children }: { children: ReactNode }) {
                   Login
                 </Button>
               )}
-              {!(router.pathname === '/signup') && (
+              {!(router.pathname === '/signup') ? (
                 <Button onClick={() => router.push('/signup')}>Sign Up</Button>
+              ) : (
+                <HStack>
+                  <Text color={'#7A7A7A'} fontSize="sm">
+                    Already have an account?
+                  </Text>
+                  <Button
+                    onClick={() => router.push('/login')}
+                    rightIcon={
+                      <MdKeyboardArrowRight
+                        size={18}
+                        style={{ transform: 'translateY(4px)' }}
+                      />
+                    }
+                    px="0.5rem"
+                    iconSpacing={'0.2rem'}
+                    variant={'unstyled'}
+                    height="fit-content"
+                    lineHeight={'20px'}
+                  >
+                    Login
+                  </Button>
+                </HStack>
               )}
             </HStack>{' '}
           </>
@@ -122,7 +146,7 @@ export function Header({ children }: { children: ReactNode }) {
             {' '}
             Sign Up{' '}
           </Button>
-          <Link href="/projects" style={{ width: '100%' }}>
+          <Link href="/projects" style={{ width: '100%' }} passHref>
             <Flex
               direction={'row'}
               alignItems="center"
@@ -145,7 +169,7 @@ export function Header({ children }: { children: ReactNode }) {
               </Box>
             </Flex>
           </Link>
-          <Link href="/about" style={{ width: '100%' }}>
+          <Link href="/rounds" style={{ width: '100%' }} passHref>
             <Flex
               direction={'row'}
               alignItems="center"
@@ -164,7 +188,7 @@ export function Header({ children }: { children: ReactNode }) {
                 fontSize="15px"
                 fontWeight="400"
               >
-                About
+                Funding Round
               </Box>
             </Flex>
           </Link>
@@ -174,14 +198,15 @@ export function Header({ children }: { children: ReactNode }) {
   );
 }
 
-export function AuthHeader(props: { publicKey: String }) {
+export function AuthHeader() {
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
   const { isOpen, onToggle, onClose } = useDisclosure();
   const router = useRouter();
-  const { disconnect } = useWallet();
+  const { disconnect, publicKey } = useWallet();
+  const pubKey = publicKey?.toBase58();
 
-  if (!props.publicKey) return <></>;
-  const addr = props.publicKey;
+  if (!pubKey) return <></>;
+  const addr = pubKey;
   // console.log('pubkey');
   let first = addr.slice(0, 4);
   let last = addr.slice(addr.length - 4, addr.length);
@@ -224,13 +249,23 @@ export function AuthHeader(props: { publicKey: String }) {
           />
         ) : (
           <>
-            {/* <HStack gap='1rem' pl='3rem'>
-              <Text>Projects</Text>
-              <Center>
-                <Box width='4px' height='4px' bg='white' rounded='full' />
-              </Center>
-              <Text>About</Text>
-            </HStack> */}
+            {!(router.pathname === '/signup') && (
+              <HStack gap="1rem">
+                <Link href="/projects" passHref>
+                  <Text fontSize="sm" fontWeight={'600'} cursor={'pointer'}>
+                    Projects
+                  </Text>
+                </Link>
+                <Center>
+                  {/*  <Box width='4px' height='4px' bg='white' rounded='full' />*/}
+                </Center>
+                <Link href="/rounds" passHref>
+                  <Text fontSize="sm" fontWeight={'600'} cursor={'pointer'}>
+                    Funding Rounds
+                  </Text>
+                </Link>
+              </HStack>
+            )}
             <DeskNavMenu />
           </>
         )}
@@ -250,7 +285,7 @@ export function AuthHeader(props: { publicKey: String }) {
           <Button onClick={() => disconnect()} w="full" borderColor="white">
             Logout
           </Button>
-          <Link href="/profile" style={{ width: '100%' }}>
+          <Link href="/profile" style={{ width: '100%' }} passHref>
             <Flex
               direction={'row'}
               alignItems="center"
@@ -273,7 +308,7 @@ export function AuthHeader(props: { publicKey: String }) {
               </Box>
             </Flex>
           </Link>
-          <Link href="/projects" style={{ width: '100%' }}>
+          <Link href="/projects" style={{ width: '100%' }} passHref>
             <Flex
               direction={'row'}
               alignItems="center"
@@ -296,7 +331,7 @@ export function AuthHeader(props: { publicKey: String }) {
               </Box>
             </Flex>
           </Link>
-          <Link href="/about" style={{ width: '100%' }}>
+          <Link href="/rounds" style={{ width: '100%' }} passHref>
             <Flex
               direction={'row'}
               alignItems="center"
@@ -315,7 +350,7 @@ export function AuthHeader(props: { publicKey: String }) {
                 fontSize="15px"
                 fontWeight="400"
               >
-                About
+                Funding Round
               </Box>
             </Flex>
           </Link>{' '}
