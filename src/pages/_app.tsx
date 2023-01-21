@@ -8,7 +8,9 @@ import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import { FC } from 'react';
 import HomeLayout from 'src/components/Layouts/HomeLayout';
+import DispatchApp from 'src/context/dispatchContext';
 require('@solana/wallet-adapter-react-ui/styles.css');
+require('@usedispatch/forum/dist/style.css');
 
 const GATEKEEPER_NETWORK = 'uniqobk8oGh4XBLMqM68K8M2zNu3CdYX7q5go7whQiv';
 const CLUSTER = WalletAdapterNetwork.Devnet;
@@ -40,13 +42,23 @@ export default function App({
   Component,
   pageProps: { ...pageProps },
 }: AppProps) {
+  const baseURL = 'http://localhost:3000';
+  const forumURL = '/project';
+  const topicURL = '/project';
   return (
     <WalletConnectionProvider>
       <ChakraProvider theme={theme}>
         <Gateway>
-          <HomeLayout>
-            <Component {...pageProps} />
-          </HomeLayout>
+          <DispatchApp
+            cluster="devnet"
+            baseURL={baseURL}
+            forumURL={forumURL}
+            topicURL={topicURL}
+          >
+            <HomeLayout>
+              <Component {...pageProps} />
+            </HomeLayout>
+          </DispatchApp>
         </Gateway>
       </ChakraProvider>
     </WalletConnectionProvider>

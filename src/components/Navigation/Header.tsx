@@ -1,32 +1,19 @@
-import { ReactNode } from 'react';
 import {
   Box,
-  Flex,
-  Link,
   Button,
-  useDisclosure,
-  Container,
-  useMediaQuery,
   Collapse,
+  Container,
+  Flex,
   HStack,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Avatar,
-  VStack,
-  Text,
+  Link,
+  useDisclosure,
+  useMediaQuery,
 } from '@chakra-ui/react';
-import { Router, useRouter } from 'next/router';
-import { Cross as Hamburger } from 'hamburger-react';
-import Logo from '../assets/logo/Logo';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { BiChevronDown } from 'react-icons/bi';
-import WalletAdd from '../Wallet/WalletAdd';
+import { Cross as Hamburger } from 'hamburger-react';
+import { useRouter } from 'next/router';
+import { ReactNode } from 'react';
+import Logo from '../assets/logo/Logo';
 import DeskNavMenu from './DeskNavMenu';
 
 export function Header({ children }: { children: ReactNode }) {
@@ -86,6 +73,7 @@ export function Header({ children }: { children: ReactNode }) {
                   Login
                 </Button>
               )}
+              {/* <WalletMultiButton /> */}
               {!(router.pathname === '/signup') && (
                 <Button onClick={() => router.push('/signup')}>Sign Up</Button>
               )}
