@@ -8,7 +8,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { GatewayStatus, useGateway } from '@civic/solana-gateway-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TruncatedAddr } from 'src/components/Wallet/WalletAdd';
 
 const VerifyCivicAccount = () => {
@@ -35,8 +35,10 @@ const VerifyCivicAccount = () => {
           through your Civic Id.
         </Text>
         <Text color="#C5C5C5" fontSize={{ base: 'xs', md: 'sm' }}>
-          The civic ID should be connected to the same wallet {TruncatedAddr} if
-          it does not, start over by connecting civic verified wallet.
+          <>
+            The civic ID should be connected to the same wallet {TruncatedAddr}{' '}
+            if it does not, start over by connecting civic verified wallet.
+          </>
         </Text>
         <Box w="full" py="1rem">
           <Flex
