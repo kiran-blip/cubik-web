@@ -7,6 +7,10 @@ interface IWallet {
   connected: boolean;
 }
 
+interface ICivic {
+  verified: boolean;
+}
+
 interface IUser {
   _id?: string;
   wallet?: IWallet;
@@ -20,8 +24,10 @@ interface IUser {
 }
 interface IUserStore {
   user?: IUser;
+  civic?: ICivic;
   setUser: (user: IUser) => IUser | undefined;
   setWallet: (wallet: IWallet) => IUser | undefined;
+  setCivic: (varified: boolean) => ICivic | undefined;
 }
 
 const user: IUser = {
@@ -32,7 +38,9 @@ const user: IUser = {
 
 export const useUserStore = create<IUserStore>((set, get) => ({
   user: user,
+  civic: { verified: false },
   setUser: (data: IUser): IUser | undefined => {
+    console.log('inside set user');
     set(
       produce((draft) => {
         draft.user = data;
@@ -49,6 +57,15 @@ export const useUserStore = create<IUserStore>((set, get) => ({
     );
     const newUser = get().user;
     return newUser;
+  },
+  setCivic: (verified: boolean): ICivic | undefined => {
+    set(
+      produce((draft) => {
+        draft.civic.verified = verified;
+      })
+    );
+    const civic = get().civic;
+    return civic;
   },
 }));
 

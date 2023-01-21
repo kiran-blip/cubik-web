@@ -11,6 +11,7 @@ import {
 import Avatar from 'boring-avatars';
 import React from 'react';
 import WalletAdd from 'src/components/Wallet/WalletAdd';
+import ProfileTabs from './ProfileTabs';
 import useUser from './useUser';
 
 const UserDetailsCard = () => {
@@ -69,7 +70,7 @@ const UserDetailsCard = () => {
     </VStack>
   );
 };
-const UserSocialsCard = () => {
+const UserProjectsCard = () => {
   const { user } = useUser();
   return (
     <VStack
@@ -109,8 +110,9 @@ const UserProfile = () => {
       {/* ---- user details card */}
       <Stack direction={{ base: 'column', md: 'row' }} gap="1rem">
         <UserDetailsCard />
-        <UserSocialsCard />
+        <UserProjectsCard />
       </Stack>
+      <ProfileTabs />
     </Container>
   );
 };

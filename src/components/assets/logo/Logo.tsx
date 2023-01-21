@@ -1,9 +1,14 @@
-import { Center, HStack } from '@chakra-ui/react';
+import { Center, HStack, Text } from '@chakra-ui/react';
 import React from 'react';
 
 const Logo = () => {
   return (
-    <HStack gap="0.2rem" alignItems={'center'} justify="space-between">
+    <HStack
+      gap="0.2rem"
+      alignItems={'center'}
+      justify="space-between"
+      mr="3rem"
+    >
       <Center>
         <svg
           width="25"
@@ -33,6 +38,19 @@ const Logo = () => {
           </defs>
         </svg>
       </Center>
+      <Text
+        fontWeight={'700'}
+        fontSize={'xl'}
+        sx={{
+          background: 'linear-gradient(180deg, #FFFFFF 57.1%, #000000 97.9%)',
+          webkitBackgroundClip: 'text',
+          webkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          textFillColor: 'transparent',
+        }}
+      >
+        Cubik
+      </Text>
     </HStack>
   );
 };

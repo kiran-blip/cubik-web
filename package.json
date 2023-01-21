@@ -33,6 +33,7 @@
     "@solana/web3.js": "^1.72.0",
     "@supabase/supabase-js": "^2.2.2",
     "boring-avatars": "^1.7.0",
+    "chakra-react-select": "^4.4.3",
     "framer-motion": "^6",
     "hamburger-react": "^2.5.0",
     "immer": "^9.0.17",
