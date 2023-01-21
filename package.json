@@ -44,7 +44,8 @@
     "react-hook-form": "^7.42.0",
     "react-icons": "^4.7.1",
     "simple-zustand-devtools": "^1.1.0",
-    "zustand": "^4.1.5"
+    "zustand": "^4.1.5",
+    "@usedispatch/forum": "^0.5.12"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",

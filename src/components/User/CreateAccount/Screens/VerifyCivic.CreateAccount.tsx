@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { GatewayStatus, useGateway } from '@civic/solana-gateway-react';
 import { Player } from '@lottiefiles/react-lottie-player';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TruncatedAddr } from 'src/components/Wallet/WalletAdd';
 import { useUserStore } from 'src/store/userStore';
 
