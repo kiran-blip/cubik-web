@@ -10,7 +10,7 @@ import { IDL, Idl } from './program';
 // } from '@solana/spl-token';
 import NodeWallet from '@project-serum/anchor/dist/cjs/nodewallet';
 
-const mainnetId = 'DFANfKc2QfqTbw4f1d8juNKGZtDK5dQ5PxPTQxGmUiQF';
+const mainnetId = '';
 export const PROGRAM_ID = new anchor.web3.PublicKey(mainnetId);
 // const USDC_MINT = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
 
@@ -19,7 +19,7 @@ export const getProvider = (wallet: anchor.Wallet) => {
     preflightCommitment: 'processed' as anchor.web3.ConfirmOptions,
   };
 
-  const connectionURI = clusterApiUrl('devnet');
+  const connectionURI = clusterApiUrl('mainnet-beta');
 
   const connection = new anchor.web3.Connection(
     connectionURI,

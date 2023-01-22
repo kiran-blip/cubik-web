@@ -22,6 +22,7 @@ import DeskNavMenu from './DeskNavMenu';
 export function Header({ children }: { children: ReactNode }) {
   const [isSmallerThan800] = useMediaQuery('(max-width: 800px)');
   const router = useRouter();
+  const { publicKey } = useWallet();
   const { isOpen, onToggle, onClose } = useDisclosure();
   return (
     <Container
@@ -247,27 +248,26 @@ export function AuthHeader() {
             hideOutline
             rounded
           />
+        ) : publicKey ? (
+          !(router.pathname === '/signup') && (
+            <HStack gap="1rem">
+              <Link href="/projects" passHref>
+                <Text fontSize="sm" fontWeight={'600'} cursor={'pointer'}>
+                  Projects
+                </Text>
+              </Link>
+              <Center>
+                {/*  <Box width='4px' height='4px' bg='white' rounded='full' />*/}
+              </Center>
+              <Link href="/rounds" passHref>
+                <Text fontSize="sm" fontWeight={'600'} cursor={'pointer'}>
+                  Funding Rounds
+                </Text>
+              </Link>
+            </HStack>
+          )
         ) : (
-          <>
-            {!(router.pathname === '/signup') && (
-              <HStack gap="1rem">
-                <Link href="/projects" passHref>
-                  <Text fontSize="sm" fontWeight={'600'} cursor={'pointer'}>
-                    Projects
-                  </Text>
-                </Link>
-                <Center>
-                  {/*  <Box width='4px' height='4px' bg='white' rounded='full' />*/}
-                </Center>
-                <Link href="/rounds" passHref>
-                  <Text fontSize="sm" fontWeight={'600'} cursor={'pointer'}>
-                    Funding Rounds
-                  </Text>
-                </Link>
-              </HStack>
-            )}
-            <DeskNavMenu />
-          </>
+          <DeskNavMenu />
         )}
       </Flex>
       <Collapse in={isOpen} animateOpacity>

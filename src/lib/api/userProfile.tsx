@@ -15,7 +15,7 @@ export const createUser = async ({
 }): Promise<any> => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/create`, {
+      .post(`http://localhost:3001/api/v1/user/create`, {
         icon: icon,
         publickey: publickey,
         username: username,

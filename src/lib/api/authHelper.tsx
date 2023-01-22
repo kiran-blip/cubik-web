@@ -13,3 +13,18 @@ export const getUserByPubKey = async (publicKey: PublicKey): Promise<any> => {
     })
     .catch((e) => console.log('error in get response of user details -', e));
 };
+
+export const getUserByid = async (id: string) => {
+  try {
+    const res = await axios.post(
+      `http://localhost:3001/api/v1/user/getuserId`,
+      {
+        id,
+      }
+    );
+    return res.data;
+  } catch (e) {
+    console.log((e as Error).message);
+    return;
+  }
+};

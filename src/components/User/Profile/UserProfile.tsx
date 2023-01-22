@@ -9,13 +9,14 @@ import {
   Wrap,
 } from '@chakra-ui/react';
 import Avatar from 'boring-avatars';
-import React from 'react';
+import { userType } from 'interfaces/user';
 import WalletAdd from 'src/components/Wallet/WalletAdd';
 import ProfileTabs from './ProfileTabs';
-import useUser from './useUser';
-
-const UserDetailsCard = () => {
-  const { user } = useUser();
+interface Props {
+  user: userType;
+}
+const UserDetailsCard = ({ user }: Props) => {
+  // const { user } = useUser();
   return (
     <VStack
       rounded="4px"
@@ -40,7 +41,7 @@ const UserDetailsCard = () => {
         >
           <Avatar
             size={68}
-            name={user?.wallet?.publicKey as string}
+            name={user?.pub_key as string}
             variant="pixel"
             colors={['#92A1C6', '#F0AB3D', '#C271B4', '#C20D90']}
           />
@@ -52,7 +53,7 @@ const UserDetailsCard = () => {
         >
           <HStack>
             <Text fontWeight="600" fontSize={{ base: '2xl', md: '3xl' }}>
-              {user?.username}
+              {user?.userName}
             </Text>
             {/* -- verified symbol --¯¯ */}
           </HStack>
@@ -65,13 +66,12 @@ const UserDetailsCard = () => {
         px={'0.2rem'}
         fontSize={{ base: 'xs', md: 'sm' }}
       >
-        {user?.about}
+        {user?.bio}
       </Text>
     </VStack>
   );
 };
-const UserProjectsCard = () => {
-  const { user } = useUser();
+const UserProjectsCard = ({ user }: Props) => {
   return (
     <VStack
       rounded="4px"
@@ -103,14 +103,13 @@ const UserProjectsCard = () => {
     </VStack>
   );
 };
-const UserProfile = () => {
-  const { user } = useUser();
+const UserProfile = ({ user }: Props) => {
   return (
     <Container maxW="full" p="0" my="2rem">
       {/* ---- user details card */}
       <Stack direction={{ base: 'column', md: 'row' }} gap="1rem">
-        <UserDetailsCard />
-        <UserProjectsCard />
+        <UserDetailsCard user={user} />
+        <UserProjectsCard user={user} />
       </Stack>
       <ProfileTabs />
     </Container>

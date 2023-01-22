@@ -6,15 +6,16 @@ import {
 import Image from 'next/image';
 
 export const ConnectWallet = () => {
-  const { wallets, select, connecting } = useWallet();
+  const { wallets, select, publicKey, connecting } = useWallet();
 
   const onConnectWallet = async (wallet: SolanaWallet) => {
     try {
-      await wallet.adapter.connect();
+      const s = await wallet.adapter.connect();
+      console.log('con', s, publicKey?.toBase58());
+
       select(wallet.adapter.name);
     } catch (e) {
       console.log('error');
-      // throw error
     }
   };
 
