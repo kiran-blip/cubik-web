@@ -9,16 +9,22 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { useWallet } from '@solana/wallet-adapter-react';
+import {
+  Connection,
+  PublicKey,
+  Transaction,
+  TransactionInstruction,
+} from '@solana/web3.js';
 import {
   chakraComponents,
   OptionBase,
   Props,
   Select,
 } from 'chakra-react-select';
-import React from 'react';
 import { useController, UseControllerProps, useForm } from 'react-hook-form';
+import { sendSOL, sendSPL } from '../../utils/tokenTrasfer';
 import { tokens } from './tokens';
-
 interface tokenGroup extends OptionBase {
   label: string;
   value: string;
@@ -143,6 +149,7 @@ const ControlledSelect = ({
 };
 
 const VoteModalBody = () => {
+  const { publicKey, signTransaction } = useWallet();
   const {
     handleSubmit,
     register,
@@ -151,14 +158,49 @@ const VoteModalBody = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm({ defaultValues });
-  function onSubmit(values: any) {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        resolve();
-      }, 3000);
-    });
+  function getIx(values: any, connection: Connection) {
+    switch (values.token.label) {
+      case 'USDC':
+        return sendSPL(
+          'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+          publicKey as PublicKey,
+          new PublicKey('HzKYQnW67KxKQxqWZ5zZAKG44KAJU6K5stfSzJvG1hCi'),
+          values.amount,
+          connection
+        );
+
+      case 'BONK':
+        return sendSPL(
+          'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263',
+          publicKey as PublicKey,
+          new PublicKey('HzKYQnW67KxKQxqWZ5zZAKG44KAJU6K5stfSzJvG1hCi'),
+          values.amount,
+          connection
+        );
+
+      case 'SOL':
+        return sendSOL(
+          publicKey as PublicKey,
+          new PublicKey('HzKYQnW67KxKQxqWZ5zZAKG44KAJU6K5stfSzJvG1hCi'),
+          values.amount
+        );
+    }
   }
+  const onSubmit = async (values: any) => {
+    const connection = new Connection(
+      process.env.NEXT_PUBLIC_RPC_URL as string
+    );
+    const ix = await getIx(values, connection);
+    const transaction = new Transaction();
+    transaction.add(...(ix as TransactionInstruction[]));
+    const { blockhash } = await connection.getLatestBlockhash();
+    transaction.recentBlockhash = blockhash;
+    transaction.feePayer = new PublicKey(publicKey as PublicKey);
+    const signedTx = await signTransaction!(transaction);
+    const serialized_transaction = signedTx.serialize();
+    const sig = await connection.sendRawTransaction(serialized_transaction);
+    console.log(sig);
+  };
 
   return (
     <Box pt="1rem" pb="2rem">

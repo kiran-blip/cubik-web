@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { GatewayStatus, useGateway } from '@civic/solana-gateway-react';
 import { Player } from '@lottiefiles/react-lottie-player';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { useEffect, useState } from 'react';
 import { TruncatedAddr } from 'src/components/Wallet/WalletAdd';
 import { useUserStore } from 'src/store/userStore';
@@ -18,16 +19,20 @@ const VerifyCivicAccount = () => {
   const { setCivic } = useUserStore();
   const [civicLoader, setCivicLoader] = useState(false);
   const [civicVerified, setCivicVerified] = useState(false);
-  const { requestGatewayToken, gatewayStatus } = useGateway();
-
+  const { requestGatewayToken, gatewayStatus, civicPassSrcUrl } = useGateway();
+  const { publicKey } = useWallet();
   useEffect(() => {
-    if (gatewayStatus === 9) {
-      setCivicVerified(true);
-      // set global civic verified to true
-    } else if (gatewayStatus === 5 || gatewayStatus === 1) {
-      setCivicLoader(true);
+    if (publicKey && gatewayStatus !== 0) {
+      console.log(gatewayStatus, civicPassSrcUrl);
+
+      if (gatewayStatus === 9) {
+        setCivicVerified(true);
+        // set global civic verified to true
+      } else if (gatewayStatus === 5 || gatewayStatus === 1) {
+        setCivicLoader(true);
+      }
     }
-  }, [gatewayStatus]);
+  }, [gatewayStatus, publicKey]);
 
   return (
     <Stack

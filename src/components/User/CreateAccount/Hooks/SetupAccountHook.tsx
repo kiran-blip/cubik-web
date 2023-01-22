@@ -13,15 +13,17 @@ const useSetupAccount = () => {
     useState<AccountCreationStep>(AccountCreationStep.WELCOME);
 
   useEffect(() => {
-    console.log('civic verification - ', civic);
-    if (publicKey?.toBase58() && !civic?.verified && !user?._id) {
-      setWallet({ publicKey: publicKey.toBase58(), connected: true });
-      setCreateAccountScreen(AccountCreationStep.CIVIC);
-    } else if (user?.wallet?.connected && civic?.verified && !user?._id) {
-      console.log('here inside civic - ', civic.verified);
-      setCreateAccountScreen(AccountCreationStep.PROFILE_DETAILS);
-    } else if (user?.wallet?.connected && civic?.verified && user?._id) {
-      console.log('returning account success');
+    if (publicKey) {
+      console.log('civic verification - ', civic);
+      if (publicKey?.toBase58() && !civic?.verified && !user?._id) {
+        setWallet({ publicKey: publicKey.toBase58(), connected: true });
+        setCreateAccountScreen(AccountCreationStep.CIVIC);
+      } else if (user?.wallet?.connected && civic?.verified && !user?._id) {
+        console.log('here inside civic - ', civic.verified);
+        setCreateAccountScreen(AccountCreationStep.PROFILE_DETAILS);
+      } else if (user?.wallet?.connected && civic?.verified && user?._id) {
+        console.log('returning account success');
+      }
     }
   }, [
     publicKey,

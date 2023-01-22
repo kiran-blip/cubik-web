@@ -8,7 +8,7 @@ import {
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
-  Transaction,
+  TransactionInstruction,
 } from '@solana/web3.js';
 
 export const sendSPL = async (
@@ -19,16 +19,14 @@ export const sendSPL = async (
   connection: Connection
 ) => {
   try {
-    console.log(mint, fromPubKey, toPubKey, amount);
-
     const token = new PublicKey(mint);
-    const transaction = new Transaction();
+
     const fromTokenAccount = await getAssociatedTokenAddress(token, fromPubKey);
     const toTokenAccount = await getAssociatedTokenAddress(token, toPubKey);
     const toTokenAccountInfo = await connection.getAccountInfo(toTokenAccount);
-
+    const ix: TransactionInstruction[] = [];
     if (!toTokenAccountInfo) {
-      transaction.add(
+      ix.push(
         createAssociatedTokenAccountInstruction(
           fromPubKey,
           toTokenAccount,
@@ -38,7 +36,7 @@ export const sendSPL = async (
       );
     }
 
-    transaction.add(
+    ix.push(
       createTransferInstruction(
         fromTokenAccount,
         toTokenAccount,
@@ -46,11 +44,8 @@ export const sendSPL = async (
         Number(amount) * 1000000
       )
     );
-    const { blockhash } = await connection.getLatestBlockhash();
-    transaction.recentBlockhash = blockhash;
-    transaction.feePayer = fromPubKey;
 
-    return transaction;
+    return ix;
   } catch (e) {
     console.log('Error in Send SPL function:', e);
   }
@@ -66,7 +61,7 @@ export const sendSOL = async (
       toPubkey: toPubKey,
       lamports: LAMPORTS_PER_SOL * amount,
     });
-    return solTransfer;
+    return [solTransfer];
   } catch (e) {
     console.log((e as Error).message);
     return [];

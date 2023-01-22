@@ -1,6 +1,6 @@
 import { Center, HStack, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import { useWallet } from '@solana/wallet-adapter-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ConnectWallet } from './ConnectWallet';
 
 const SolanaWalletButton = () => {
@@ -86,7 +86,11 @@ const SolanaWalletButton = () => {
             noOfLines: '1',
           }}
         >
-          {publicKey ? publicKey.toBase58() : 'Connect Solana Wallet'}
+          {publicKey
+            ? publicKey.toBase58().slice(0, 4) +
+              '....' +
+              publicKey.toBase58().slice(-4)
+            : 'Connect Solana Wallet'}
         </Text>
       </HStack>
       <VStack w="full" gap="0.2rem">

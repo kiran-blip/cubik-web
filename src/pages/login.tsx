@@ -1,12 +1,16 @@
 import { Container, Heading, Text, VStack } from '@chakra-ui/react';
 import { useWallet } from '@solana/wallet-adapter-react';
-import GlareButton from 'src/components/Buttons/GlareButton';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import SolanaWalletButton from 'src/components/Wallet/SolananWalletButton';
 
 const Login = () => {
-  const { connect } = useWallet();
-  const SolanaLoginClickHandler = () => {
-    connect();
-    console.log('Jai solana');
+  const { publicKey, select, wallets, wallet } = useWallet();
+  const router = useRouter();
+  const SolanaLoginClickHandler = async () => {
+    await wallet?.adapter.connect();
+    select(wallet?.adapter.name as any);
+    console.log('Jai solana', wallets);
   };
   const TwitterLoginClickHandler = () => {
     console.log('Jai twitter');
@@ -17,6 +21,11 @@ const Login = () => {
   const CivicLoginClickHandler = () => {
     console.log('Jai civic');
   };
+  useEffect(() => {
+    if (publicKey) {
+      router.push(`/profile/${publicKey.toBase58()}`);
+    }
+  }, [publicKey]);
   return (
     <Container py={{ base: '2rem', md: '3rem' }} maxW="full" height="200rem">
       <VStack
@@ -44,7 +53,29 @@ const Login = () => {
           Login to your account and get started with funding your favorite
           projects on Solana.
         </Text>
-        <VStack w={{ base: '14rem', md: '14rem' }} gap="0.4rem" py="1.4rem">
+        <VStack
+          w={{ base: '80vw', md: '25rem' }}
+          _before={{
+            zIndex: '-1',
+            content: `" "`,
+            position: 'absolute',
+            //top: `1%`,
+            //left: `50%`,
+            overflow: 'hidden',
+            width: '6rem',
+            height: '6rem',
+            transform: 'translate(-4rem, -2rem)',
+            filter: 'blur(120px)',
+            WebkitBackdropFilter: 'blur(0px)',
+            WebkitFilter: 'blur(120px)',
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          }}
+          gap="0.4rem"
+          py={{ base: '1.4rem', md: '1.4rem' }}
+        >
+          <SolanaWalletButton />
+        </VStack>
+        {/* <VStack w={{ base: '14rem', md: '14rem' }} gap="0.4rem" py="1.4rem">
           <GlareButton name={'Solana'} clickHandler={SolanaLoginClickHandler}>
             <svg
               width="19"
@@ -111,7 +142,7 @@ const Login = () => {
               />
             </svg>
           </GlareButton>
-        </VStack>
+        </VStack> */}
       </VStack>
     </Container>
   );

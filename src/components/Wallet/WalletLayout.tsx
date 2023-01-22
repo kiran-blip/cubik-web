@@ -18,7 +18,6 @@ import {
   SolflareWalletAdapter,
   SolletWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
-import { clusterApiUrl } from '@solana/web3.js';
 import { useRouter } from 'next/router';
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { SuccessToast } from '../Toasts/Toasts';
@@ -29,8 +28,8 @@ type Props = {
   children?: React.ReactNode;
 };
 export const WalletConnectionProvider: FC<Props> = ({ children }: Props) => {
-  const network = WalletAdapterNetwork.Devnet;
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  const network = WalletAdapterNetwork.Mainnet;
+  const endpoint = process.env.NEXT_PUBLIC_RPC_URL;
 
   const wallets = useMemo(
     () => [
@@ -48,7 +47,7 @@ export const WalletConnectionProvider: FC<Props> = ({ children }: Props) => {
   );
 
   return (
-    <ConnectionProvider endpoint={endpoint}>
+    <ConnectionProvider endpoint={endpoint as string}>
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>{children}</WalletModalProvider>
       </WalletProvider>

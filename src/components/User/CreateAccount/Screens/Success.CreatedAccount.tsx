@@ -43,7 +43,7 @@ const AccountCreatedSuccesfully = () => {
               }}
               color="#FF8EFF"
               variant={'unstyled'}
-              onClick={() => router.push('/profile')}
+              onClick={() => router.push(`/profile/${router.query.id}`)}
             >
               Go to Profile
             </Button>
