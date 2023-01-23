@@ -6,9 +6,9 @@ const Discussions = () => {
       <TopicView
         showTitle={true}
         forumId={{
-          forumID: 'AhFfjBPCoNRDExEDFYuNK2NXCWNa1gi2VUbdA7cF19CD',
+          forumID: 'FoXEtXAD9bL93RH5uFYt5rLnw9hZnenjQxxSBtoqDTTZ',
         }}
-        topicId={0}
+        topicId={1}
       />
     </>
   );

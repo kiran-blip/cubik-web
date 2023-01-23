@@ -165,7 +165,7 @@ const VoteModalBody = () => {
           'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
           publicKey as PublicKey,
           new PublicKey('HzKYQnW67KxKQxqWZ5zZAKG44KAJU6K5stfSzJvG1hCi'),
-          values.amount,
+          JSON.parse(values.amount),
           connection
         );
 
@@ -174,7 +174,7 @@ const VoteModalBody = () => {
           'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263',
           publicKey as PublicKey,
           new PublicKey('HzKYQnW67KxKQxqWZ5zZAKG44KAJU6K5stfSzJvG1hCi'),
-          values.amount,
+          JSON.parse(values.amount),
           connection
         );
 
@@ -182,7 +182,7 @@ const VoteModalBody = () => {
         return sendSOL(
           publicKey as PublicKey,
           new PublicKey('HzKYQnW67KxKQxqWZ5zZAKG44KAJU6K5stfSzJvG1hCi'),
-          values.amount
+          JSON.parse(values.amount)
         );
     }
   }
@@ -200,6 +200,7 @@ const VoteModalBody = () => {
     const serialized_transaction = signedTx.serialize();
     const sig = await connection.sendRawTransaction(serialized_transaction);
     console.log(sig);
+    // backend
   };
 
   return (
@@ -238,7 +239,7 @@ const VoteModalBody = () => {
           </FormLabel>
           <HStack>
             <Input
-              type={'number'}
+              type={'text'}
               background={'#1D1D1D'}
               id="amount"
               {...register('amount', {

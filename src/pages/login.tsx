@@ -23,7 +23,7 @@ const Login = () => {
   };
   useEffect(() => {
     if (publicKey) {
-      router.push(`/profile/${publicKey.toBase58()}`);
+      router.push(`/projects`);
     }
   }, [publicKey]);
   return (
