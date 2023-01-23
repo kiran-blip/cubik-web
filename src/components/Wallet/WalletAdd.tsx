@@ -1,7 +1,7 @@
 import { useClipboard } from '@chakra-ui/hooks';
 import { Center, HStack, Text } from '@chakra-ui/layout';
 import { useToast } from '@chakra-ui/toast';
-import React, { SetStateAction, useEffect } from 'react';
+import { SetStateAction, useEffect } from 'react';
 import { TbCopy } from 'react-icons/tb';
 import { useUserStore } from 'src/store/userStore';
 import { SuccessToast } from '../Toasts/Toasts';
@@ -14,10 +14,10 @@ type PropsType = {
 
 const WalletAdd = ({ size, color, copy }: PropsType) => {
   const { onCopy, value, setValue, hasCopied } = useClipboard('');
-  const { user } = useUserStore();
+  const { wallet } = useUserStore();
   const toast = useToast();
-  const addr = user?.wallet?.publicKey
-    ? user?.wallet?.publicKey
+  const addr = wallet?.publicKey
+    ? wallet?.publicKey
     : 'DJDqurqEufUxUhdtXgcRydDQ8VamZHpvMPioDt5nAdEW';
 
   useEffect(() => {
@@ -121,9 +121,9 @@ const WalletAdd = ({ size, color, copy }: PropsType) => {
 };
 
 export const TruncatedAddr = () => {
-  const { user } = useUserStore();
-  const addr = user?.wallet?.publicKey
-    ? user?.wallet?.publicKey
+  const { wallet } = useUserStore();
+  const addr = wallet?.publicKey
+    ? wallet?.publicKey
     : 'DJDqurqEufUxUhdtXgcRydDQ8VamZHpvMPioDt5nAdEW';
 
   let first = addr.slice(0, 4);
