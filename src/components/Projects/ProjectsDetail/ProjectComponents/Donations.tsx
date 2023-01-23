@@ -14,7 +14,6 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
-import React from 'react';
 import VoteModalBody from 'src/components/Vote/VoteModal';
 import { formatNumberWithK } from 'src/lib/functions';
 import WalletAdd from '../../../Wallet/WalletAdd';
@@ -64,10 +63,13 @@ export const ProjectsDonation = ({
         </ModalContent>
       </Modal>
       <VStack
-        width={{ base: 'auto', lg: '9rem' }}
-        alignItems={{ base: 'center', md: 'center' }}
+        position={'fixed'}
+        right="20rem"
+        w={{ base: 'auto', sm: 'auto', md: '18rem' }}
+        //width={{ base: 'auto', lg: '9rem' }}
+        alignItems={{ base: 'center', md: 'start' }}
       >
-        <VStack gap="0" spacing="0" alignItems={'center'} pb="0.5rem">
+        <VStack gap="0" spacing="0" alignItems={'start'} pb="0.5rem">
           <Heading fontSize={{ base: '2xl', md: '4xl' }}>
             ${formatNumberWithK(projectDetails.total_funding_raised)}
           </Heading>
@@ -75,7 +77,7 @@ export const ProjectsDonation = ({
             Funding Raised
           </Text>
         </VStack>
-        <Button onClick={onOpen} rounded="full" w="full">
+        <Button onClick={onOpen} rounded="full" w="10rem">
           Contribute
         </Button>
       </VStack>

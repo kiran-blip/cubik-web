@@ -1,4 +1,3 @@
-import { Avatar } from '@chakra-ui/avatar';
 import { Button } from '@chakra-ui/button';
 import { HStack, Text, VStack } from '@chakra-ui/layout';
 import {
@@ -8,15 +7,15 @@ import {
   MenuItem,
   MenuList,
 } from '@chakra-ui/menu';
+import { Avatar } from '@chakra-ui/react';
 import { useWallet } from '@solana/wallet-adapter-react';
-import React from 'react';
 import { BiChevronDown } from 'react-icons/bi';
-import useUser from '../User/Profile/useUser';
+import { useUserStore } from 'src/store/userStore';
 import WalletAdd from '../Wallet/WalletAdd';
 
 const DeskNavMenu = () => {
   const { disconnect } = useWallet();
-  const { user } = useUser();
+  const { user, wallet } = useUserStore();
   return (
     <HStack gap="0.5rem">
       <Menu>
@@ -42,7 +41,7 @@ const DeskNavMenu = () => {
           <HStack p="0.5rem 1rem" gap="0.5rem">
             <Avatar size={'sm'} />
             <VStack alignItems={'start'} justify="center" w="full" spacing="0">
-              <Text fontSize="md">{user?.username}</Text>
+              <Text fontSize="md">{user?.userName}</Text>
               <WalletAdd size="xs" copy={true} />
             </VStack>
           </HStack>

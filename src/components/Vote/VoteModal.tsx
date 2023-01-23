@@ -1,14 +1,21 @@
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
   Box,
   Button,
+  Center,
+  Container,
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Heading,
   HStack,
   Input,
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { Player } from '@lottiefiles/react-lottie-player';
 import { useWallet } from '@solana/wallet-adapter-react';
 import {
   Connection,
@@ -22,9 +29,12 @@ import {
   Props,
   Select,
 } from 'chakra-react-select';
+import { useState } from 'react';
 import { useController, UseControllerProps, useForm } from 'react-hook-form';
+import { BsArrowRight, BsTwitter } from 'react-icons/bs';
 import { sendSOL, sendSPL } from '../../utils/tokenTrasfer';
 import { tokens } from './tokens';
+
 interface tokenGroup extends OptionBase {
   label: string;
   value: string;
@@ -158,6 +168,7 @@ const VoteModalBody = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm({ defaultValues });
+  const [successScreen, setSuccessScreen] = useState(true);
   function getIx(values: any, connection: Connection) {
     switch (values.token.label) {
       case 'USDC':
@@ -205,56 +216,65 @@ const VoteModalBody = () => {
 
   return (
     <Box pt="1rem" pb="2rem">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {/* ---- select cohort  ---- */}
-        <FormControl
-          pb="1rem"
-          variant={'outline'}
-          colorScheme={'pink'}
-          isRequired
-        >
-          <FormLabel fontSize={{ base: 'xs', md: 'sm' }} htmlFor="cohort">
-            Select Cohort
-          </FormLabel>
-          <Input
-            background={'#1D1D1D'}
-            id="cohort"
-            {...register('cohort', {
-              required: 'This is required',
-            })}
-          />
-          <FormErrorMessage>
-            {errors.cohort ? <>{errors.cohort.message}</> : <></>}
-          </FormErrorMessage>
-        </FormControl>
-        {/*---- enter amount and token --- */}
-        <FormControl
-          pb="1rem"
-          variant={'outline'}
-          colorScheme={'pink'}
-          isRequired
-        >
-          <FormLabel fontSize={{ base: 'xs', md: 'sm' }} htmlFor="amount">
-            Enter amount
-          </FormLabel>
-          <HStack>
-            <Input
-              type={'text'}
-              background={'#1D1D1D'}
-              id="amount"
-              {...register('amount', {
-                required: 'This is required',
-              })}
-            />{' '}
-            <ControlledSelect
-              control={control}
-              name="token"
-              id="token"
-              options={token}
-              label="Food Groups"
-              rules={{ required: 'Please select a token' }}
-            />
-            {/* 
+      {!successScreen ? (
+        <>
+          <Alert mb="1.5rem" bg="#261526" status="error">
+            <AlertIcon color="#DB79DB" />
+            <AlertDescription fontSize="sm" color="#DEDEDE">
+              Your donations will directly go to the project without matching
+              anything form matching pool.
+            </AlertDescription>
+          </Alert>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {/* ---- select cohort  ---- */}
+            <FormControl
+              pb="1.5rem"
+              variant={'outline'}
+              colorScheme={'pink'}
+              isRequired
+            >
+              <FormLabel fontSize={{ base: 'xs', md: 'sm' }} htmlFor="cohort">
+                Select Cohort
+              </FormLabel>
+              <Input
+                background={'#1D1D1D'}
+                id="cohort"
+                {...register('cohort', {
+                  required: 'This is required',
+                })}
+              />
+              <FormErrorMessage>
+                {errors.cohort ? <>{errors.cohort.message}</> : <></>}
+              </FormErrorMessage>
+            </FormControl>
+            {/*---- enter amount and token --- */}
+            <FormControl
+              pb="1.5rem"
+              variant={'outline'}
+              colorScheme={'pink'}
+              isRequired
+            >
+              <FormLabel fontSize={{ base: 'xs', md: 'sm' }} htmlFor="amount">
+                Enter amount
+              </FormLabel>
+              <HStack>
+                <Input
+                  type={'text'}
+                  background={'#1D1D1D'}
+                  id="amount"
+                  {...register('amount', {
+                    required: 'This is required',
+                  })}
+                />{' '}
+                <ControlledSelect
+                  control={control}
+                  name="token"
+                  id="token"
+                  options={token}
+                  label="Food Groups"
+                  rules={{ required: 'Please select a token' }}
+                />
+                {/* 
                            _selected={{
                 backgroundColor: 'transparent',
                 boxShadow: '0 0 0 1px transparent',
@@ -281,67 +301,121 @@ const VoteModalBody = () => {
               border="1px solid #242424"
               w="10rem"
                           */}
-          </HStack>
-          <FormErrorMessage>
-            {errors.cohort ? <>{errors.cohort.message}</> : <></>}
-          </FormErrorMessage>
-        </FormControl>
-        {/*-- select percentage donation to matching pool-- */}
-        <FormControl pb="1rem">
-          <FormLabel
-            fontSize={{ base: 'xs', md: 'sm' }}
-            htmlFor="donation_to_matching_pool"
-          >
-            Select Token
-          </FormLabel>
-          <HStack gap="0.1rem">
-            {Array.from([0, 5, 10, 25, 50]).map((percentage, key) => {
-              return (
-                <VStack
-                  cursor="pointer"
-                  key={key}
-                  backgroundColor="#1D1D1D"
-                  _hover={{ outline: '1px solid #3E3E3E' }}
-                  outline={
-                    watch('donation_to_matching_pool') === percentage
-                      ? '1px solid #944694'
-                      : '1px solid #242424'
-                  }
-                  rounded="4px"
-                  w="3rem"
-                  h="3rem"
-                  align={'center'}
-                  justify="center"
-                  onClick={() => {
-                    setValue('donation_to_matching_pool', percentage);
+              </HStack>
+              <FormErrorMessage>
+                {errors.cohort ? <>{errors.cohort.message}</> : <></>}
+              </FormErrorMessage>
+            </FormControl>
+            {/*-- select percentage donation to matching pool-- */}
+            <FormControl pb="1.5rem">
+              <FormLabel
+                fontSize={{ base: 'xs', md: 'sm' }}
+                htmlFor="donation_to_matching_pool"
+              >
+                Donate to Cubik Matching pool.
+              </FormLabel>
+              <HStack gap="0.1rem">
+                {Array.from([0, 5, 10, 25, 50]).map((percentage, key) => {
+                  return (
+                    <VStack
+                      cursor="pointer"
+                      key={key}
+                      backgroundColor="#1D1D1D"
+                      _hover={{ outline: '1px solid #3E3E3E' }}
+                      outline={
+                        watch('donation_to_matching_pool') === percentage
+                          ? '1px solid #944694'
+                          : '1px solid #242424'
+                      }
+                      rounded="4px"
+                      w="3rem"
+                      h="3rem"
+                      align={'center'}
+                      justify="center"
+                      onClick={() => {
+                        setValue('donation_to_matching_pool', percentage);
+                      }}
+                    >
+                      <Text fontSize="sm" fontWeight={'500'} color="#A6A6A6">
+                        {percentage}%
+                      </Text>
+                    </VStack>
+                  );
+                })}
+              </HStack>
+              <FormErrorMessage>
+                {errors.donation_to_matching_pool ? (
+                  <>{errors.donation_to_matching_pool.message}</>
+                ) : (
+                  <></>
+                )}
+              </FormErrorMessage>
+            </FormControl>
+            <Button
+              py="1.1rem"
+              fontSize={'md'}
+              mt={'3rem'}
+              w="full"
+              isLoading={isSubmitting}
+              type="submit"
+            >
+              Pay with Wallet
+            </Button>
+          </form>
+        </>
+      ) : (
+        <Container maxW="5xl">
+          <VStack py={{ base: '1rem', md: '2rem' }}>
+            <Player
+              autoplay
+              keepLastFrame
+              speed={1}
+              src={
+                'https://assets1.lottiefiles.com/packages/lf20_YJFPyhtgf9.json'
+              }
+              style={{ height: `150px`, width: `150px` }}
+            />
+            <VStack maxW="xl" textAlign={'center'}>
+              <Heading fontSize={{ base: 'xl', md: '2xl' }}>
+                Contribution Successful
+              </Heading>
+              <Text color="#C5C5C5" fontSize={{ base: 'xs', md: 'sm' }}>
+                Your contribution through Quadratic Funding has been received.
+                Thank you for supporting Public Good.
+              </Text>
+              <Center py="0rem" gap="1rem">
+                <Button
+                  rightIcon={<BsArrowRight size={14} />}
+                  iconSpacing="1rem"
+                  fontSize="14px"
+                  _hover={{
+                    iconSpacing: '1rem',
                   }}
+                  color="#FF8EFF"
+                  variant={'unstyled'}
+                  // onClick={() => router.push(`/profile/${router.query.id}`)}
                 >
-                  <Text fontSize="sm" fontWeight={'500'} color="#A6A6A6">
-                    {percentage}%
-                  </Text>
-                </VStack>
-              );
-            })}
-          </HStack>
-          <FormErrorMessage>
-            {errors.donation_to_matching_pool ? (
-              <>{errors.donation_to_matching_pool.message}</>
-            ) : (
-              <></>
-            )}
-          </FormErrorMessage>
-        </FormControl>
-        <Button
-          py="1.1rem"
-          fontSize={'md'}
-          mt={'3rem'}
-          w="full"
-          isLoading={isSubmitting}
-          type="submit"
-        >
-          Submit
-        </Button>
-      </form>
+                  View Transaction
+                </Button>
+              </Center>
+              <Center pt="2rem" gap="1rem">
+                <Button
+                  rightIcon={<BsTwitter size={14} />}
+                  iconSpacing="1rem"
+                  fontSize="14px"
+                  _hover={{
+                    iconSpacing: '1rem',
+                  }}
+                  //                  variant={'unstyled'}
+                  // onClick={() => router.push(`/profile/${router.query.id}`)}
+                >
+                  Share with friends
+                </Button>
+              </Center>
+            </VStack>
+          </VStack>
+        </Container>
+      )}
     </Box>
   );
 };

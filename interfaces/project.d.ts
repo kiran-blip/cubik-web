@@ -12,4 +12,11 @@ export type projectType = {
   owner?: userType;
   contributors?: contributions[];
   socials?: [{ name: string; url: string }];
+  project_owners?: [
+    {
+      name: string;
+      image: string;
+      pubkey: string;
+    }
+  ];
 };

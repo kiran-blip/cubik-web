@@ -4,7 +4,7 @@ const Discussions = () => {
   return (
     <>
       <TopicView
-        showTitle={true}
+        showTitle={false}
         forumId={{
           forumID: 'FoXEtXAD9bL93RH5uFYt5rLnw9hZnenjQxxSBtoqDTTZ',
         }}

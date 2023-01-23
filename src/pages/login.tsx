@@ -3,29 +3,35 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import SolanaWalletButton from 'src/components/Wallet/SolananWalletButton';
+import { getUserByPubKey } from 'src/lib/api/authHelper';
+import { useUserStore } from 'src/store/userStore';
 
 const Login = () => {
-  const { publicKey, select, wallets, wallet } = useWallet();
+  const { publicKey } = useWallet();
   const router = useRouter();
-  const SolanaLoginClickHandler = async () => {
-    await wallet?.adapter.connect();
-    select(wallet?.adapter.name as any);
-    console.log('Jai solana', wallets);
-  };
-  const TwitterLoginClickHandler = () => {
-    console.log('Jai twitter');
-  };
-  const GithubLoginClickHandler = () => {
-    console.log('Jai Github');
-  };
-  const CivicLoginClickHandler = () => {
-    console.log('Jai civic');
-  };
+  const { setUser, setWallet } = useUserStore();
+
   useEffect(() => {
     if (publicKey) {
-      router.push(`/projects`);
+      setWallet({ connected: true, publicKey: publicKey.toBase58() });
+      getUserByPubKey(publicKey)
+        .then((res) => {
+          const data = res.data;
+          console.log('res');
+          setUser({
+            id: data.id,
+            bio: data.bio,
+            picture: data.picture ?? '',
+            userName: data.username,
+            verified: data.verified,
+          });
+          router.push(`/projects`);
+        })
+        .catch((e) => {
+          console.log('error fetching user - ', e);
+        });
     }
-  }, [publicKey]);
+  }, [publicKey, router, setUser, setWallet]);
   return (
     <Container py={{ base: '2rem', md: '3rem' }} maxW="full" height="200rem">
       <VStack

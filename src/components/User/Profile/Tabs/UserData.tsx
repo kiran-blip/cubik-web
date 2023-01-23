@@ -72,8 +72,8 @@ const UserData = () => {
           <Alert bg="#261526" status="error">
             <AlertIcon color="#DB79DB" />
             <AlertDescription fontSize="sm" color="#DEDEDE">
-              You should have at-least 2 verified badges in order to start
-              voting for your favourite project
+              You should have at-least 3 verified badges in order to start
+              voting for your favorite project
             </AlertDescription>
           </Alert>
           <BadgesList />

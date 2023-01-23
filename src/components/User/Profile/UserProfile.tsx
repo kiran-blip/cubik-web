@@ -12,11 +12,11 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import Avatar from 'boring-avatars';
-import { userType } from 'interfaces/user';
 import WalletAdd from 'src/components/Wallet/WalletAdd';
+import { IUser, useUserStore } from 'src/store/userStore';
 import ProfileTabs from './ProfileTabs';
 interface Props {
-  user: userType;
+  user: IUser;
   loading: boolean;
 }
 
@@ -470,14 +470,15 @@ const UserOrgCard = ({ user, loading }: Props) => {
     </VStack>
   );
 };
-const UserProfile = ({ user, loading }: Props) => {
+const UserProfile = ({ loading }: any) => {
+  const { user } = useUserStore();
   return (
     <Container maxW="full" p="0" my="2rem">
       {/* ---- user details card */}
       <Stack direction={{ base: 'column', md: 'row' }} gap="1rem">
-        <UserDetailsCard user={user} loading={!loading} />
-        <UserProjectsCard user={user} loading={!loading} />
-        <UserOrgCard user={user} loading={!loading} />
+        <UserDetailsCard user={user as IUser} loading={!loading} />
+        <UserProjectsCard user={user as IUser} loading={!loading} />
+        <UserOrgCard user={user as IUser} loading={!loading} />
       </Stack>
       <ProfileTabs />
     </Container>

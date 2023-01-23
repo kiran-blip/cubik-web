@@ -3,7 +3,7 @@ import { Container, useToast } from '@chakra-ui/react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import MainBackground from 'src/components/Background/MainBackground';
 import { AuthHeader, Header } from 'src/components/Navigation/Header';
 import { useUserStore } from 'src/store/userStore';
@@ -56,11 +56,7 @@ const HomeLayout = ({ children }: ChildInterface) => {
   useEffect(() => {
     if (disconnecting) {
       console.log('disconnecting...................');
-      setUser({
-        _id: undefined,
-        wallet: undefined,
-        username: undefined,
-      });
+      setUser({});
       SuccessToast({
         toast,
         message: 'Wallet Disconnected',
@@ -72,7 +68,7 @@ const HomeLayout = ({ children }: ChildInterface) => {
     <Container p="0" maxW={'full'}>
       <MainBackground />
       <Container p="0" position={'absolute'} maxW={'full'} zIndex="999">
-        {user?._id ? (
+        {user?.id ? (
           <AuthHeader />
         ) : (
           <Header>

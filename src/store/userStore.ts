@@ -1,10 +1,9 @@
-import { userType } from '@/interfaces/user';
 import produce from 'immer';
 import { mountStoreDevtool } from 'simple-zustand-devtools';
 import { create } from 'zustand';
 
 interface IWallet {
-  publicKey: string;
+  publicKey?: string;
   connected: boolean;
 }
 
@@ -12,36 +11,33 @@ interface ICivic {
   verified: boolean;
 }
 
-interface IUser {
-  _id?: string;
-  wallet?: IWallet;
-  username?: string;
-  about?: string;
-  socials?: {
-    name: string;
-    status: boolean;
-    _id: string;
-  }[];
+export interface IUser {
+  id?: string;
+  bio?: string;
+  picture?: String;
+  pub_key?: String;
+  userName?: String;
+  verified?: Boolean;
 }
 interface IUserStore {
   user?: IUser;
+  wallet?: IWallet;
   civic?: ICivic;
-  profile: userType | null;
-  setProfile: (user: userType) => void;
   setUser: (user: IUser) => IUser | undefined;
   setWallet: (wallet: IWallet) => IUser | undefined;
   setCivic: (varified: boolean) => ICivic | undefined;
 }
 
 const user: IUser = {
-  _id: undefined,
-  wallet: undefined,
-  username: undefined,
+  id: undefined,
 };
-
+const wallet: IWallet = {
+  connected: false,
+};
 export const useUserStore = create<IUserStore>((set, get) => ({
   user: user,
   civic: { verified: false },
+  wallet: wallet,
   setUser: (data: IUser): IUser | undefined => {
     console.log('inside set user');
     set(
@@ -55,7 +51,7 @@ export const useUserStore = create<IUserStore>((set, get) => ({
   setWallet: (wallet: IWallet): IUser | undefined => {
     set(
       produce((draft) => {
-        draft.user.wallet = wallet;
+        draft.wallet = wallet;
       })
     );
     const newUser = get().user;
@@ -69,14 +65,6 @@ export const useUserStore = create<IUserStore>((set, get) => ({
     );
     const civic = get().civic;
     return civic;
-  },
-  profile: null,
-  setProfile: (data: userType): void => {
-    set(
-      produce((draft) => {
-        draft.profile = data;
-      })
-    );
   },
 }));
 

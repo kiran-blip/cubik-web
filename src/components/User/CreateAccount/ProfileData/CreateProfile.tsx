@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import WalletAdd from 'src/components/Wallet/WalletAdd';
 import { createUser } from 'src/lib/api/userProfile';
@@ -18,6 +19,7 @@ import { useUserStore } from 'src/store/userStore';
 
 const CreateProfile = () => {
   const { publicKey } = useWallet();
+  const [loading, setLoading] = useState<boolean>(false);
   const { user, setUser } = useUserStore();
   const router = useRouter();
   const {
@@ -26,14 +28,15 @@ const CreateProfile = () => {
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      username: user?.username,
+      username: user?.userName,
       publickey: publicKey?.toBase58(),
-      about: user?._id,
+      about: user?.id,
       icon: publicKey?.toBase58(),
     },
   });
 
   function onSubmit(values: any) {
+    setLoading(true);
     return new Promise<void>((resolve) => {
       //sign transaction here
       createUser({
@@ -44,20 +47,23 @@ const CreateProfile = () => {
         bio: values.about,
       }).then((res) => {
         if (res.data.data) {
-          console.log('create user response, ', res.data.data);
+          console.log('create user response, ', res.data);
           setUser({
-            _id: res.data.data.id,
-            about: res.data.data.bio,
-            username: res.data.data.username,
+            id: res.data.data.id,
+            bio: res.data.bio,
+            userName: res.data.username,
           });
           console.log('user updated');
           // update user
           router.push(`/signup/success?id=${res.data.data.id}`);
         } else {
-          console.log('user already exsist'); // throw some error
+          console.log('user already exist'); // throw some error
         }
       });
+      setLoading(false);
       resolve();
+    }).catch((e) => {
+      setLoading(false);
     });
   }
   return (
@@ -193,7 +199,7 @@ const CreateProfile = () => {
           fontSize={'md'}
           mt={'3rem'}
           w="full"
-          isLoading={isSubmitting}
+          isLoading={loading}
           type="submit"
         >
           Submit

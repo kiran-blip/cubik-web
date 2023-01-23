@@ -1,7 +1,6 @@
 import { projectType } from '@/interfaces/project';
 import {
   Avatar,
-  AvatarGroup,
   Button,
   Container,
   Heading,
@@ -28,7 +27,7 @@ const ProjectCard = ({ project }: PropsType) => {
       onClick={() => {
         router.push('/projects/' + project.name);
       }}
-      h={{ base: '', md: '22rem' }}
+      h={{ base: '', md: '17rem' }}
       cursor="pointer"
       m="0"
       backgroundColor="#070707"
@@ -123,7 +122,7 @@ const ProjectCard = ({ project }: PropsType) => {
         </HStack>
       </VStack>
       <HStack spacing="4px">
-        <AvatarGroup size="xs" max={3} variant="contributorsGroup">
+        {/*<AvatarGroup size="xs" max={3} variant="contributorsGroup">
           <Avatar
             name="Ryan Florence"
             src="https://bit.ly/ryan-florence"
@@ -136,9 +135,9 @@ const ProjectCard = ({ project }: PropsType) => {
           <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
           <Avatar name="Prosper Otemuyiwa" src="https://bit.ly/prosper-baba" />
           <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
-        </AvatarGroup>
+        </AvatarGroup> */}
         <Text fontSize={{ base: 'xs', md: 'xs' }} color="#BABABA">
-          <b>2.5k</b> contributors
+          <b>No</b> Contributions yet
         </Text>
       </HStack>
     </VStack>

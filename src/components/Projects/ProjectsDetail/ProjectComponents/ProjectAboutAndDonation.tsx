@@ -1,16 +1,13 @@
 import { projectType } from '@/interfaces/project';
 import {
   Avatar,
-  Center,
   Container,
-  Divider,
   Heading,
   Stack,
   Text,
   VStack,
   Wrap,
 } from '@chakra-ui/react';
-import React from 'react';
 import CustomTag from 'src/components/Tags';
 import { ProjectsDonation } from './Donations';
 // section 1
@@ -27,6 +24,7 @@ export const ProjectsAboutAndDonation = ({
       flexDir={{ base: 'row', lg: 'row' }}
       alignItems={{ base: 'end', md: 'center' }}
       justifyContent="space-between"
+      position="relative"
     >
       <Stack
         direction={{ base: 'column', md: 'row' }}
@@ -60,9 +58,9 @@ export const ProjectsAboutAndDonation = ({
           </Wrap>
         </VStack>
       </Stack>
-      <Center height="100px" opacity={'0.3'}>
+      {/* <Center height="100px" opacity={'0.3'}>
         <Divider orientation="vertical" />
-      </Center>
+      </Center> */}
       <ProjectsDonation projectDetails={projectDetails} />
     </Container>
   );

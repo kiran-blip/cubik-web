@@ -1,28 +1,37 @@
 import { Container, Heading } from '@chakra-ui/react';
-import { userType } from 'interfaces/user';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import UserProfile from 'src/components/User/Profile/UserProfile';
 import { getUserByid } from 'src/lib/api/authHelper';
+import { useUserStore } from 'src/store/userStore';
 const Profile = () => {
   const router = useRouter();
-  const [userProfile, setUserProfile] = useState<userType | null>();
   const [loading, setLoading] = useState<boolean>(false);
+  const { setUser } = useUserStore();
   useEffect(() => {
     const fetchUser = async () => {
       if (router.query.id) {
         setLoading(true);
         const data = await getUserByid(router.query.id as string);
-        setUserProfile({
+        console.log('data - ', data);
+        // setUserProfile({
+        //   id: data.data.id,
+        //   name: data.data.name ?? '',
+        //   bio: data.data.bio,
+        //   contributions: data.Contribution ?? [],
+        //   picture: data.data.picture ?? '',
+        //   userName: data.data.username,
+        //   pub_key: data.data.publickey,
+        //   verified: data.data.verified,
+        //   projects: data.data.Projects ?? [],
+        // });
+        setUser({
           id: data.data.id,
-          name: data.data.name ?? '',
           bio: data.data.bio,
-          contributions: data.data.Contribution ?? [],
           picture: data.data.picture ?? '',
           userName: data.data.username,
           pub_key: data.data.publickey,
           verified: data.data.verified,
-          projects: data.data.Projects ?? [],
         });
         setLoading(false);
       }
@@ -37,7 +46,7 @@ const Profile = () => {
       >
         Profile
       </Heading>
-      <UserProfile loading={loading} user={userProfile as userType} />
+      <UserProfile loading={loading} />
     </Container>
   );
 };
