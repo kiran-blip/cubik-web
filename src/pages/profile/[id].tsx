@@ -33,12 +33,11 @@ const Profile = () => {
     <Container maxW="7xl" p={{ base: '1rem', md: '1rem 6rem' }}>
       <Heading
         fontWeight={{ base: '500', md: '600' }}
-        fontSize={{ base: '2xl', md: '4xl' }}
+        fontSize={{ base: 'xl', md: '2xl' }}
       >
         Profile
       </Heading>
-      {/* // loading state is need  here */}
-      {loading ? '' : <UserProfile user={userProfile as userType} />}
+      <UserProfile loading={loading} user={userProfile as userType} />
     </Container>
   );
 };

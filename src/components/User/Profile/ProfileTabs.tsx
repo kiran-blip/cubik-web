@@ -21,7 +21,7 @@ const ProfileTabs = () => {
           <Tab fontSize={{ base: 'sm', md: 'md' }}>NFTs</Tab>
         </TabList>
 
-        <TabPanels p="1rem">
+        <TabPanels p={{ base: '1rem', md: '0rem' }}>
           <TabPanel>
             <UserData />
           </TabPanel>

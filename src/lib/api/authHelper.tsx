@@ -17,7 +17,7 @@ export const getUserByPubKey = async (publicKey: PublicKey): Promise<any> => {
 export const getUserByid = async (id: string) => {
   try {
     const res = await axios.post(
-      `http://localhost:3001/api/v1/user/getuserId`,
+      `https://cubic-backend-production.up.railway.app/api/v1/user/getuserId`,
       {
         id,
       }

@@ -42,7 +42,7 @@ export default function App({
   Component,
   pageProps: { ...pageProps },
 }: AppProps) {
-  const baseURL = 'http://localhost:3000';
+  const baseURL = 'https://cubic-backend-production.up.railway.app/';
   const forumURL = '/project';
   const topicURL = '/project';
   return (

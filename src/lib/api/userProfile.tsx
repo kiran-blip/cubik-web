@@ -15,13 +15,16 @@ export const createUser = async ({
 }): Promise<any> => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`http://localhost:3001/api/v1/user/create`, {
-        icon: icon,
-        publickey: publickey,
-        username: username,
-        verified: verified,
-        bio: bio,
-      })
+      .post(
+        `https://cubic-backend-production.up.railway.app/api/v1/user/create`,
+        {
+          icon: icon,
+          publickey: publickey,
+          username: username,
+          verified: verified,
+          bio: bio,
+        }
+      )
       .then((res) => {
         resolve(res);
       })
