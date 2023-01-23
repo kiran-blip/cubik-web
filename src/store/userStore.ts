@@ -1,3 +1,4 @@
+import { userType } from '@/interfaces/user';
 import produce from 'immer';
 import { mountStoreDevtool } from 'simple-zustand-devtools';
 import { create } from 'zustand';
@@ -25,6 +26,8 @@ interface IUser {
 interface IUserStore {
   user?: IUser;
   civic?: ICivic;
+  profile: userType | null;
+  setProfile: (user: userType) => void;
   setUser: (user: IUser) => IUser | undefined;
   setWallet: (wallet: IWallet) => IUser | undefined;
   setCivic: (varified: boolean) => ICivic | undefined;
@@ -66,6 +69,14 @@ export const useUserStore = create<IUserStore>((set, get) => ({
     );
     const civic = get().civic;
     return civic;
+  },
+  profile: null,
+  setProfile: (data: userType): void => {
+    set(
+      produce((draft) => {
+        draft.profile = data;
+      })
+    );
   },
 }));
 

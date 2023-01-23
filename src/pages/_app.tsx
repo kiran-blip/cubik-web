@@ -13,7 +13,7 @@ require('@solana/wallet-adapter-react-ui/styles.css');
 require('@usedispatch/forum/dist/style.css');
 
 const GATEKEEPER_NETWORK = 'uniqobk8oGh4XBLMqM68K8M2zNu3CdYX7q5go7whQiv';
-const CLUSTER = WalletAdapterNetwork.Devnet;
+const CLUSTER = WalletAdapterNetwork.Mainnet;
 const Gateway: FC<{
   children?: React.ReactNode;
 }> = ({ children }) => {
@@ -50,7 +50,7 @@ export default function App({
       <ChakraProvider theme={theme}>
         <Gateway>
           <DispatchApp
-            cluster="devnet"
+            cluster="mainnet-beta"
             baseURL={baseURL}
             forumURL={forumURL}
             topicURL={topicURL}
