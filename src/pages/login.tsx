@@ -15,9 +15,9 @@ const Login = () => {
     if (publicKey) {
       setWallet({ connected: true, publicKey: publicKey.toBase58() });
       getUserByPubKey(publicKey)
-        .then((res) => {
-          const data = res.data;
-          console.log('res');
+        .then((data) => {
+          // const data = res.data;
+          console.log('res', data);
           setUser({
             id: data.id,
             bio: data.bio,

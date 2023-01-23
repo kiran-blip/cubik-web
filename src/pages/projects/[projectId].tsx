@@ -10,7 +10,7 @@ const ProjectDetails = () => {
   const project = data.filter((project, index) => {
     return project.name === query.projectId;
   });
-  console.log(project[0].detailed_description);
+  // console.log(project[0].detailed_description);
 
   return (
     <Container maxW="6xl" py={{ base: '1rem', md: '2rem' }}>

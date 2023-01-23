@@ -12,6 +12,7 @@ import {
   Heading,
   HStack,
   Input,
+  Link,
   Text,
   VStack,
 } from '@chakra-ui/react';
@@ -168,7 +169,8 @@ const VoteModalBody = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm({ defaultValues });
-  const [successScreen, setSuccessScreen] = useState(true);
+  const [successScreen, setSuccessScreen] = useState(false);
+  const [signature, setSignature] = useState<string>('');
   function getIx(values: any, connection: Connection) {
     switch (values.token.label) {
       case 'USDC':
@@ -211,6 +213,11 @@ const VoteModalBody = () => {
     const serialized_transaction = signedTx.serialize();
     const sig = await connection.sendRawTransaction(serialized_transaction);
     console.log(sig);
+    if (sig) {
+      setSuccessScreen(true);
+      setSignature(sig);
+      localStorage.setItem('amount-con', values.amount);
+    }
     // backend
   };
 
@@ -384,19 +391,20 @@ const VoteModalBody = () => {
                 Thank you for supporting Public Good.
               </Text>
               <Center py="0rem" gap="1rem">
-                <Button
-                  rightIcon={<BsArrowRight size={14} />}
-                  iconSpacing="1rem"
-                  fontSize="14px"
-                  _hover={{
-                    iconSpacing: '1rem',
-                  }}
-                  color="#FF8EFF"
-                  variant={'unstyled'}
-                  // onClick={() => router.push(`/profile/${router.query.id}`)}
-                >
-                  View Transaction
-                </Button>
+                <Link href={`https://solscan.io/tx/${signature}`} isExternal>
+                  <Button
+                    rightIcon={<BsArrowRight size={14} />}
+                    iconSpacing="1rem"
+                    fontSize="14px"
+                    _hover={{
+                      iconSpacing: '1rem',
+                    }}
+                    color="#FF8EFF"
+                    variant={'unstyled'}
+                  >
+                    View Transaction
+                  </Button>
+                </Link>
               </Center>
               <Center pt="2rem" gap="1rem">
                 <Button
